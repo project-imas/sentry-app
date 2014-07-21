@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>12C186EE-9E2F-4A36-BACC-1D1B27E43FB4</string>
+	<key>IDESourceControlProjectName</key>
+	<string>SingleSignOn</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>9320DEAD-FB7F-43B0-A140-F572CF42150D</key>
+		<string>https://github.com/project-imas/app-password.git</string>
+		<key>943E0D22-4016-4724-8B07-078F75F22DE1</key>
+		<string>ssh://github.com/project-imas/single-sign-on.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>sso-app/SingleSignOn.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>9320DEAD-FB7F-43B0-A140-F572CF42150D</key>
+		<string>../../vendor/app-password</string>
+		<key>943E0D22-4016-4724-8B07-078F75F22DE1</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/project-imas/single-sign-on.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>943E0D22-4016-4724-8B07-078F75F22DE1</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>9320DEAD-FB7F-43B0-A140-F572CF42150D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>app-password</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>943E0D22-4016-4724-8B07-078F75F22DE1</string>
+			<key>IDESourceControlWCCName</key>
+			<string>sso</string>
+		</dict>
+	</array>
+</dict>
+</plist>
