@@ -1,0 +1,25 @@
+PODS:
+  - AppPassword (1.0):
+    - SecureFoundation (~> 1.0)
+  - SecureFoundation (1.0)
+  - SecurityCheck (1.0)
+
+DEPENDENCIES:
+  - AppPassword (from `https://github.com/project-imas/app-password.git`)
+  - SecureFoundation (from `https://github.com/project-imas/securefoundation.git`)
+  - SecurityCheck (from `https://github.com/project-imas/security-check.git`)
+
+EXTERNAL SOURCES:
+  AppPassword:
+    :git: https://github.com/project-imas/app-password.git
+  SecureFoundation:
+    :git: https://github.com/project-imas/securefoundation.git
+  SecurityCheck:
+    :git: https://github.com/project-imas/security-check.git
+
+SPEC CHECKSUMS:
+  AppPassword: 78e11896453277159b1480af914c9faa0ed3ad6b
+  SecureFoundation: a4787ae62a44da9b6bc98d75a31acb56a9ebe3d7
+  SecurityCheck: 942207c5add2273a2515aa1d7a009292a0322924
+
+COCOAPODS: 0.33.1
