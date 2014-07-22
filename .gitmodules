@@ -1,9 +1,0 @@
-[submodule "vendor/security-check"]
-	path = vendor/security-check
-	url = git://github.com/project-imas/security-check.git
-[submodule "vendor/securefoundation"]
-	path = vendor/securefoundation
-	url = git://github.com/project-imas/securefoundation.git
-[submodule "vendor/app-password"]
-	path = vendor/app-password
-	url = git://github.com/project-imas/app-password.git

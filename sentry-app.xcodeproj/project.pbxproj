@@ -8,12 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		339CBAA9197EBD6700CCF227 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 339CBAA8197EBD6700CCF227 /* CoreLocation.framework */; };
-		B4A496E1197EDAD40091D280 /* APComplexPass_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4A496DF197EDAD40091D280 /* APComplexPass_iPad.storyboard */; };
-		B4A496E2197EDAD40091D280 /* APComplexPass_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4A496E0197EDAD40091D280 /* APComplexPass_iPhone.storyboard */; };
-		B4A496E5197EDADE0091D280 /* APQuestionPass_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4A496E3197EDADE0091D280 /* APQuestionPass_iPad.storyboard */; };
-		B4A496E6197EDADE0091D280 /* APQuestionPass_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4A496E4197EDADE0091D280 /* APQuestionPass_iPhone.storyboard */; };
-		B4A496E9197EDAE60091D280 /* APSimplePass_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4A496E7197EDAE60091D280 /* APSimplePass_iPad.storyboard */; };
-		B4A496EA197EDAE60091D280 /* APSimplePass_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4A496E8197EDAE60091D280 /* APSimplePass_iPhone.storyboard */; };
 		B4A496EC197EDD6E0091D280 /* libPods-sentry-app.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A496EB197EDD6E0091D280 /* libPods-sentry-app.a */; };
 		FE808B3617C68CA7000A0225 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE808B3517C68CA7000A0225 /* UIKit.framework */; };
 		FE808B3817C68CA7000A0225 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE808B3717C68CA7000A0225 /* Foundation.framework */; };
@@ -38,12 +32,6 @@
 /* Begin PBXFileReference section */
 		1B9E5664BF944AA5887CAB7E /* Pods-sentry-app.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sentry-app.xcconfig"; path = "Pods/Pods-sentry-app.xcconfig"; sourceTree = "<group>"; };
 		339CBAA8197EBD6700CCF227 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		B4A496DF197EDAD40091D280 /* APComplexPass_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = APComplexPass_iPad.storyboard; path = Pods/AppPassword/AppPassword/APComplexPass_iPad.storyboard; sourceTree = "<group>"; };
-		B4A496E0197EDAD40091D280 /* APComplexPass_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = APComplexPass_iPhone.storyboard; path = Pods/AppPassword/AppPassword/APComplexPass_iPhone.storyboard; sourceTree = "<group>"; };
-		B4A496E3197EDADE0091D280 /* APQuestionPass_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = APQuestionPass_iPad.storyboard; path = Pods/AppPassword/AppPassword/APQuestionPass_iPad.storyboard; sourceTree = "<group>"; };
-		B4A496E4197EDADE0091D280 /* APQuestionPass_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = APQuestionPass_iPhone.storyboard; path = Pods/AppPassword/AppPassword/APQuestionPass_iPhone.storyboard; sourceTree = "<group>"; };
-		B4A496E7197EDAE60091D280 /* APSimplePass_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = APSimplePass_iPad.storyboard; path = Pods/AppPassword/AppPassword/APSimplePass_iPad.storyboard; sourceTree = "<group>"; };
-		B4A496E8197EDAE60091D280 /* APSimplePass_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = APSimplePass_iPhone.storyboard; path = Pods/AppPassword/AppPassword/APSimplePass_iPhone.storyboard; sourceTree = "<group>"; };
 		B4A496EB197EDD6E0091D280 /* libPods-sentry-app.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-sentry-app.a"; path = "Pods/build/Release-iphoneos/libPods-sentry-app.a"; sourceTree = "<group>"; };
 		FE808B3217C68CA7000A0225 /* sentry-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sentry-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE808B3517C68CA7000A0225 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -95,12 +83,6 @@
 		B417418019784C2F008E62C6 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				B4A496E7197EDAE60091D280 /* APSimplePass_iPad.storyboard */,
-				B4A496E8197EDAE60091D280 /* APSimplePass_iPhone.storyboard */,
-				B4A496E3197EDADE0091D280 /* APQuestionPass_iPad.storyboard */,
-				B4A496E4197EDADE0091D280 /* APQuestionPass_iPhone.storyboard */,
-				B4A496DF197EDAD40091D280 /* APComplexPass_iPad.storyboard */,
-				B4A496E0197EDAD40091D280 /* APComplexPass_iPhone.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -235,16 +217,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B4A496E2197EDAD40091D280 /* APComplexPass_iPhone.storyboard in Resources */,
-				B4A496EA197EDAE60091D280 /* APSimplePass_iPhone.storyboard in Resources */,
-				B4A496E5197EDADE0091D280 /* APQuestionPass_iPad.storyboard in Resources */,
-				B4A496E9197EDAE60091D280 /* APSimplePass_iPad.storyboard in Resources */,
 				FE808B4217C68CA7000A0225 /* InfoPlist.strings in Resources */,
 				FE808B4A17C68CA7000A0225 /* Default.png in Resources */,
-				B4A496E6197EDADE0091D280 /* APQuestionPass_iPhone.storyboard in Resources */,
 				FE808B4C17C68CA7000A0225 /* Default@2x.png in Resources */,
 				FE808B4E17C68CA7000A0225 /* Default-568h@2x.png in Resources */,
-				B4A496E1197EDAD40091D280 /* APComplexPass_iPad.storyboard in Resources */,
 				FE808B5117C68CA7000A0225 /* MainStoryboard.storyboard in Resources */,
 				FEA60A2617CFC50200B9AADB /* iMAS_logo_small.png in Resources */,
 			);
