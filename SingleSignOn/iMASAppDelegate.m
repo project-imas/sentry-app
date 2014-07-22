@@ -8,7 +8,6 @@
 
 #import "iMASAppDelegate.h"
 #import "APViewController.h"
-
 #import "iMASMainViewController.h"
 
 
@@ -22,6 +21,8 @@
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 //@synthesize navigationController=_navigationController;
 
+CLLocationManager *locationManager;
+CLCircularRegion *region;
 
 BOOL fromApp = NO;
 NSString* callerURI = @"";
@@ -83,6 +84,17 @@ NSString* pbName;
     // Override point for customization after application launch.
     //iMASMainViewController *controller = (iMASMainViewController *)self.window.rootViewController;
     //controller.managedObjectContext = self.managedObjectContext;
+    
+    //Geolocation
+    locationManager = [[CLLocationManager alloc]init];
+    CLLocationCoordinate2D coordinates = { .latitude = 37.33, .longitude = -122.02 };
+    region = [[CLCircularRegion alloc] initWithCenter:coordinates radius:10. identifier:@"Fence"];
+    
+    locationManager.delegate = self;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [locationManager startUpdatingLocation];
+    [locationManager startMonitoringForRegion:region];
+    
     
     [self performLaunchSteps];
     
@@ -220,6 +232,30 @@ NSString* pbName;
 - (NSURL *)applicationDocumentsDirectory
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+//Geolocation functions
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    NSLog(@"didFailWithError: %@", error);
+    //UIAlertView *errorAlert = [[UIAlertView alloc]
+    //                           initWithTitle:@"Error" message:@"Failed to Get Your Location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    //[errorAlert show];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    //NSLog(@"Update: %@", locations.lastObject);
+}
+
+- (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
+{
+    NSLog(@"Entered fence");
+}
+
+- (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
+{
+    NSLog(@"Exited fence");
+    //React to device leaving fence
 }
 
 @end

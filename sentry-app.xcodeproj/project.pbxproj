@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		332DDBF2197D64F400B0A577 /* AppPassword.framework in Resources */ = {isa = PBXBuildFile; fileRef = FE808B8317C69143000A0225 /* AppPassword.framework */; };
+		339CBAA9197EBD6700CCF227 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 339CBAA8197EBD6700CCF227 /* CoreLocation.framework */; };
 		3E1E22151858AAB6001FDCE3 /* libSecurityCheck.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E1E22121858A9D0001FDCE3 /* libSecurityCheck.a */; };
 		B417417219784B64008E62C6 /* AppPassword.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B417417119784B64008E62C6 /* AppPassword.framework */; };
 		B417417A19784C1E008E62C6 /* APSimplePass_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B417417419784C1E008E62C6 /* APSimplePass_iPad.storyboard */; };
@@ -83,6 +84,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		339CBAA8197EBD6700CCF227 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		3E1E220C1858A9CF001FDCE3 /* SecurityCheck.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SecurityCheck.xcodeproj; path = "vendor/security-check/SecurityCheck.xcodeproj"; sourceTree = "<group>"; };
 		B417417119784B64008E62C6 /* AppPassword.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppPassword.framework; path = "../../Library/Developer/Xcode/DerivedData/SingleSignOn-cokyroqukslzvdgksyptjroopoxe/Build/Products/Debug-iphoneos/AppPassword.embeddedframework/AppPassword.framework"; sourceTree = "<group>"; };
 		B417417419784C1E008E62C6 /* APSimplePass_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = APSimplePass_iPad.storyboard; path = "vendor/app-password/AppPassword/APSimplePass_iPad.storyboard"; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				339CBAA9197EBD6700CCF227 /* CoreLocation.framework in Frameworks */,
 				B417417219784B64008E62C6 /* AppPassword.framework in Frameworks */,
 				3E1E22151858AAB6001FDCE3 /* libSecurityCheck.a in Frameworks */,
 				FE808B9817C691D7000A0225 /* QuartzCore.framework in Frameworks */,
@@ -196,6 +199,7 @@
 		FE808B3417C68CA7000A0225 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				339CBAA8197EBD6700CCF227 /* CoreLocation.framework */,
 				B417417119784B64008E62C6 /* AppPassword.framework */,
 				FE808B3517C68CA7000A0225 /* UIKit.framework */,
 				FE808B3717C68CA7000A0225 /* Foundation.framework */,

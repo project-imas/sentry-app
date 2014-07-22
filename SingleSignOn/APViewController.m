@@ -33,6 +33,7 @@
 @end
 
 
+
 @implementation APViewController
 typedef void (^cbBlock) (void);
 
@@ -83,7 +84,6 @@ void problem() {
         checkLinks(chkCallback);
         
         dbgStop;
-         
         dbgCheck(chkCallback);
          
     }
