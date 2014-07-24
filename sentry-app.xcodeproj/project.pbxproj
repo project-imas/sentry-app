@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		339CBAA9197EBD6700CCF227 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 339CBAA8197EBD6700CCF227 /* CoreLocation.framework */; };
+		339CBAAE198174D600CCF227 /* passcodeCheckCert.der in Resources */ = {isa = PBXBuildFile; fileRef = 339CBAAD198174D600CCF227 /* passcodeCheckCert.der */; };
 		B4A496EC197EDD6E0091D280 /* libPods-sentry-app.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A496EB197EDD6E0091D280 /* libPods-sentry-app.a */; };
 		FE808B3617C68CA7000A0225 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE808B3517C68CA7000A0225 /* UIKit.framework */; };
 		FE808B3817C68CA7000A0225 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE808B3717C68CA7000A0225 /* Foundation.framework */; };
@@ -32,6 +33,7 @@
 /* Begin PBXFileReference section */
 		1B9E5664BF944AA5887CAB7E /* Pods-sentry-app.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sentry-app.xcconfig"; path = "Pods/Pods-sentry-app.xcconfig"; sourceTree = "<group>"; };
 		339CBAA8197EBD6700CCF227 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		339CBAAD198174D600CCF227 /* passcodeCheckCert.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = passcodeCheckCert.der; path = SingleSignOn/passcodeCheckCert.der; sourceTree = "<group>"; };
 		B4A496EB197EDD6E0091D280 /* libPods-sentry-app.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-sentry-app.a"; path = "Pods/build/Release-iphoneos/libPods-sentry-app.a"; sourceTree = "<group>"; };
 		FE808B3217C68CA7000A0225 /* sentry-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sentry-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE808B3517C68CA7000A0225 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -97,6 +99,7 @@
 		FE808B2917C68CA7000A0225 = {
 			isa = PBXGroup;
 			children = (
+				339CBAAD198174D600CCF227 /* passcodeCheckCert.der */,
 				FEA60A2F17CFCA7700B9AADB /* iMAS_logo_small.png */,
 				FE808B9717C691D7000A0225 /* QuartzCore.framework */,
 				FE808B9517C691CB000A0225 /* Security.framework */,
@@ -218,6 +221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE808B4217C68CA7000A0225 /* InfoPlist.strings in Resources */,
+				339CBAAE198174D600CCF227 /* passcodeCheckCert.der in Resources */,
 				FE808B4A17C68CA7000A0225 /* Default.png in Resources */,
 				FE808B4C17C68CA7000A0225 /* Default@2x.png in Resources */,
 				FE808B4E17C68CA7000A0225 /* Default-568h@2x.png in Resources */,

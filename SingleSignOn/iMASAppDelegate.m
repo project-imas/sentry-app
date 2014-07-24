@@ -85,6 +85,9 @@ NSString* pbName;
     //iMASMainViewController *controller = (iMASMainViewController *)self.window.rootViewController;
     //controller.managedObjectContext = self.managedObjectContext;
     
+    //Passcode Check
+    [self checkPasscode];
+    
     //Geolocation
     locationManager = [[CLLocationManager alloc]init];
     CLLocationCoordinate2D coordinates = { .latitude = 37.33, .longitude = -122.02 };
@@ -99,6 +102,19 @@ NSString* pbName;
     [self performLaunchSteps];
     
     return YES;
+}
+
+-(void)checkPasscode
+{
+    
+    if([iMAS_PasscodeCheck isPasscodeSet]){
+        NSLog(@"isPasscodeSet TRUE");
+    }
+    else{
+        NSLog(@"isPasscodeSet FALSE");
+        // React to insecure device here
+        // Limit functionality, kill app, and/or phone home
+    }
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

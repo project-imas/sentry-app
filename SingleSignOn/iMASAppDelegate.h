@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import <PasscodeCheck/iMAS_PasscodeCheck.h>
 
 @interface iMASAppDelegate : UIResponder <UIApplicationDelegate, CLLocationManagerDelegate>
 
