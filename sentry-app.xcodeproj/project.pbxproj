@@ -33,7 +33,7 @@
 /* Begin PBXFileReference section */
 		1B9E5664BF944AA5887CAB7E /* Pods-sentry-app.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sentry-app.xcconfig"; path = "Pods/Pods-sentry-app.xcconfig"; sourceTree = "<group>"; };
 		339CBAA8197EBD6700CCF227 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		339CBAAD198174D600CCF227 /* passcodeCheckCert.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = passcodeCheckCert.der; path = SingleSignOn/passcodeCheckCert.der; sourceTree = "<group>"; };
+		339CBAAD198174D600CCF227 /* passcodeCheckCert.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = passcodeCheckCert.der; path = "sentry-app/passcodeCheckCert.der"; sourceTree = "<group>"; };
 		B4A496EB197EDD6E0091D280 /* libPods-sentry-app.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-sentry-app.a"; path = "Pods/build/Release-iphoneos/libPods-sentry-app.a"; sourceTree = "<group>"; };
 		FE808B3217C68CA7000A0225 /* sentry-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sentry-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE808B3517C68CA7000A0225 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -148,7 +148,8 @@
 				FE808B5217C68CA7000A0225 /* SingleSignOn.xcdatamodeld */,
 				FE808B3E17C68CA7000A0225 /* Supporting Files */,
 			);
-			path = SingleSignOn;
+			name = SingleSignOn;
+			path = "sentry-app";
 			sourceTree = "<group>";
 		};
 		FE808B3E17C68CA7000A0225 /* Supporting Files */ = {
@@ -366,8 +367,8 @@
 					"$(SRCROOT)/**",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SingleSignOn/sentry-app-Prefix.pch";
-				INFOPLIST_FILE = "SingleSignOn/sentry-app-Info.plist";
+				GCC_PREFIX_HEADER = "sentry-app/sentry-app-Prefix.pch";
+				INFOPLIST_FILE = "sentry-app/sentry-app-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "sentry-app";
@@ -385,8 +386,8 @@
 					"$(SRCROOT)/**",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SingleSignOn/sentry-app-Prefix.pch";
-				INFOPLIST_FILE = "SingleSignOn/sentry-app-Info.plist";
+				GCC_PREFIX_HEADER = "sentry-app/sentry-app-Prefix.pch";
+				INFOPLIST_FILE = "sentry-app/sentry-app-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "sentry-app";
