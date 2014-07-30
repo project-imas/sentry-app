@@ -6,4 +6,5 @@ pod 'SecureFoundation', :git => 'https://github.com/project-imas/securefoundatio
 pod 'SecurityCheck', :git => 'https://github.com/project-imas/security-check.git'
 pod 'AppPassword', :git => 'https://github.com/project-imas/app-password.git'
 pod 'PasscodeCheck', :git => 'https://github.com/project-imas/passcode-check.git'
+pod 'SystemMonitor', :git => 'https://github.com/project-imas/system-monitor.git'
 end

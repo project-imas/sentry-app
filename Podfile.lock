@@ -4,12 +4,14 @@ PODS:
   - PasscodeCheck (1.0)
   - SecureFoundation (1.0)
   - SecurityCheck (1.0)
+  - SystemMonitor (1.0)
 
 DEPENDENCIES:
   - AppPassword (from `https://github.com/project-imas/app-password.git`)
   - PasscodeCheck (from `https://github.com/project-imas/passcode-check.git`)
   - SecureFoundation (from `https://github.com/project-imas/securefoundation.git`)
   - SecurityCheck (from `https://github.com/project-imas/security-check.git`)
+  - SystemMonitor (from `https://github.com/project-imas/system-monitor.git`)
 
 EXTERNAL SOURCES:
   AppPassword:
@@ -20,11 +22,14 @@ EXTERNAL SOURCES:
     :git: https://github.com/project-imas/securefoundation.git
   SecurityCheck:
     :git: https://github.com/project-imas/security-check.git
+  SystemMonitor:
+    :git: https://github.com/project-imas/system-monitor.git
 
 SPEC CHECKSUMS:
   AppPassword: 4b8f139b05cc4f950504f191f0023eda41d7ca07
   PasscodeCheck: 0076bcee801ab527f1a655100689b00a9c092626
   SecureFoundation: a4787ae62a44da9b6bc98d75a31acb56a9ebe3d7
   SecurityCheck: 942207c5add2273a2515aa1d7a009292a0322924
+  SystemMonitor: 8e4c75cc9e717b83636b59e692b40db67169919c
 
 COCOAPODS: 0.33.1
