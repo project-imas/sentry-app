@@ -15,6 +15,8 @@ Geofencing and location services allow device tracking and can take action if a 
 
 [Single-sign-on](https://github.com/project-imas/single-sign-on) allows the SentryApp to protect your custom apps by requiring the SentryApp to run.  If a device is vulnerable and fails one of the previous tests (device-level password, jailbreak detection, debugger detection, geofencing), then access to the custom app is prevented.
 
+[System-monitor](https://github.com/project-imas/system-monitor) enables the SentryApp to monitor network connections and processess on the iPhone.  Check for malicious processess or unauthorized connections.
+
 
 ## Setup
 
