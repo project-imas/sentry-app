@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		339CBAA9197EBD6700CCF227 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 339CBAA8197EBD6700CCF227 /* CoreLocation.framework */; };
 		339CBAAE198174D600CCF227 /* passcodeCheckCert.der in Resources */ = {isa = PBXBuildFile; fileRef = 339CBAAD198174D600CCF227 /* passcodeCheckCert.der */; };
+		B4140DAF198953FE00C7897E /* iMASMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4140DAE198953FE00C7897E /* iMASMainTableViewController.m */; };
+		B45BF547198965E100E6A1F5 /* iMASSecurityCheckTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B45BF546198965E100E6A1F5 /* iMASSecurityCheckTableViewController.m */; };
+		B45BF54B1989852000E6A1F5 /* iMASSysMonitorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B45BF54A1989852000E6A1F5 /* iMASSysMonitorTableViewController.m */; };
+		B4986EB219898E62000663C2 /* iMASFilterDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4986EB119898E62000663C2 /* iMASFilterDetailsTableViewController.m */; };
 		B4A496EC197EDD6E0091D280 /* libPods-sentry-app.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A496EB197EDD6E0091D280 /* libPods-sentry-app.a */; };
 		FE808B3617C68CA7000A0225 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE808B3517C68CA7000A0225 /* UIKit.framework */; };
 		FE808B3817C68CA7000A0225 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE808B3717C68CA7000A0225 /* Foundation.framework */; };
@@ -34,6 +38,15 @@
 		1B9E5664BF944AA5887CAB7E /* Pods-sentry-app.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sentry-app.xcconfig"; path = "Pods/Pods-sentry-app.xcconfig"; sourceTree = "<group>"; };
 		339CBAA8197EBD6700CCF227 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		339CBAAD198174D600CCF227 /* passcodeCheckCert.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = passcodeCheckCert.der; path = "sentry-app/passcodeCheckCert.der"; sourceTree = "<group>"; };
+		B4140DAD198953FE00C7897E /* iMASMainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iMASMainTableViewController.h; sourceTree = "<group>"; };
+		B4140DAE198953FE00C7897E /* iMASMainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iMASMainTableViewController.m; sourceTree = "<group>"; };
+		B45BF545198965E100E6A1F5 /* iMASSecurityCheckTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iMASSecurityCheckTableViewController.h; sourceTree = "<group>"; };
+		B45BF546198965E100E6A1F5 /* iMASSecurityCheckTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iMASSecurityCheckTableViewController.m; sourceTree = "<group>"; };
+		B45BF548198966DF00E6A1F5 /* constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
+		B45BF5491989852000E6A1F5 /* iMASSysMonitorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iMASSysMonitorTableViewController.h; sourceTree = "<group>"; };
+		B45BF54A1989852000E6A1F5 /* iMASSysMonitorTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iMASSysMonitorTableViewController.m; sourceTree = "<group>"; };
+		B4986EB019898E62000663C2 /* iMASFilterDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iMASFilterDetailsTableViewController.h; sourceTree = "<group>"; };
+		B4986EB119898E62000663C2 /* iMASFilterDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iMASFilterDetailsTableViewController.m; sourceTree = "<group>"; };
 		B4A496EB197EDD6E0091D280 /* libPods-sentry-app.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-sentry-app.a"; path = "Pods/build/Release-iphoneos/libPods-sentry-app.a"; sourceTree = "<group>"; };
 		FE808B3217C68CA7000A0225 /* sentry-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sentry-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE808B3517C68CA7000A0225 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -82,6 +95,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B4140DB01989540300C7897E /* Custom View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B4140DAD198953FE00C7897E /* iMASMainTableViewController.h */,
+				B4140DAE198953FE00C7897E /* iMASMainTableViewController.m */,
+				B45BF545198965E100E6A1F5 /* iMASSecurityCheckTableViewController.h */,
+				B45BF546198965E100E6A1F5 /* iMASSecurityCheckTableViewController.m */,
+				B45BF5491989852000E6A1F5 /* iMASSysMonitorTableViewController.h */,
+				B45BF54A1989852000E6A1F5 /* iMASSysMonitorTableViewController.m */,
+				B4986EB019898E62000663C2 /* iMASFilterDetailsTableViewController.h */,
+				B4986EB119898E62000663C2 /* iMASFilterDetailsTableViewController.m */,
+			);
+			name = "Custom View Controllers";
+			sourceTree = "<group>";
+		};
 		B417418019784C2F008E62C6 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,7 +132,7 @@
 				FE808B9717C691D7000A0225 /* QuartzCore.framework */,
 				FE808B9517C691CB000A0225 /* Security.framework */,
 				B417418019784C2F008E62C6 /* Storyboards */,
-				FE808B3D17C68CA7000A0225 /* SingleSignOn */,
+				FE808B3D17C68CA7000A0225 /* SentryApp */,
 				FE808B3417C68CA7000A0225 /* Frameworks */,
 				FE808B3317C68CA7000A0225 /* Products */,
 				1B9E5664BF944AA5887CAB7E /* Pods-sentry-app.xcconfig */,
@@ -132,23 +160,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		FE808B3D17C68CA7000A0225 /* SingleSignOn */ = {
+		FE808B3D17C68CA7000A0225 /* SentryApp */ = {
 			isa = PBXGroup;
 			children = (
+				FE808B3E17C68CA7000A0225 /* Supporting Files */,
 				B433F47B19784D6B00D799E9 /* iPad */,
+				FE808B4F17C68CA7000A0225 /* MainStoryboard.storyboard */,
 				FE808B9917C6928E000A0225 /* APViewController.h */,
 				FE808B9A17C6928E000A0225 /* APViewController.m */,
 				FE808B4617C68CA7000A0225 /* iMASAppDelegate.h */,
 				FE808B4717C68CA7000A0225 /* iMASAppDelegate.m */,
-				FE808B4F17C68CA7000A0225 /* MainStoryboard.storyboard */,
 				FE808B5517C68CA7000A0225 /* iMASMainViewController.h */,
 				FE808B5617C68CA7000A0225 /* iMASMainViewController.m */,
 				FE808B5817C68CA7000A0225 /* iMASFlipsideViewController.h */,
 				FE808B5917C68CA7000A0225 /* iMASFlipsideViewController.m */,
 				FE808B5217C68CA7000A0225 /* SingleSignOn.xcdatamodeld */,
-				FE808B3E17C68CA7000A0225 /* Supporting Files */,
+				B4140DB01989540300C7897E /* Custom View Controllers */,
+				B45BF548198966DF00E6A1F5 /* constants.h */,
 			);
-			name = SingleSignOn;
+			name = SentryApp;
 			path = "sentry-app";
 			sourceTree = "<group>";
 		};
@@ -271,7 +301,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B45BF54B1989852000E6A1F5 /* iMASSysMonitorTableViewController.m in Sources */,
+				B45BF547198965E100E6A1F5 /* iMASSecurityCheckTableViewController.m in Sources */,
 				FE808B4417C68CA7000A0225 /* main.m in Sources */,
+				B4140DAF198953FE00C7897E /* iMASMainTableViewController.m in Sources */,
+				B4986EB219898E62000663C2 /* iMASFilterDetailsTableViewController.m in Sources */,
 				FE808B4817C68CA7000A0225 /* iMASAppDelegate.m in Sources */,
 				FE808B5417C68CA7000A0225 /* SingleSignOn.xcdatamodeld in Sources */,
 				FE808B5717C68CA7000A0225 /* iMASMainViewController.m in Sources */,

@@ -8,9 +8,10 @@
 
 #import "iMASAppDelegate.h"
 #import "APViewController.h"
-#import "iMASMainViewController.h"
-
-
+//#import "iMASMainViewController.h"
+#import "iMASMainTableViewController.h"
+#import "constants.h"
+#import "iMASSecurityCheckTableViewController.h"
 
 @implementation iMASAppDelegate
 
@@ -71,10 +72,9 @@ NSString* pbName;
 - (void)validUserAccess:(APViewController *)controller {
     NSLog(@"validUserAccess - Delegate");
 
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-    id contID = [storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
-
-    self.window.rootViewController = contID;
+    UINavigationController *loginController = [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"MainTableViewController"];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:loginController];
+    self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
 }
 
@@ -87,6 +87,9 @@ NSString* pbName;
     
     //Passcode Check
     [self checkPasscode];
+    
+    // store/load settings for sentry app (in keychain?)
+    [self loadSettings];
     
     //Geolocation
     locationManager = [[CLLocationManager alloc]init];
@@ -104,6 +107,17 @@ NSString* pbName;
     return YES;
 }
 
+- (void)loadSettings {
+    NSLog(@"dbgcheck psswd: %@",[IMSKeychain passwordForService:serviceName account:@"dbgCheck"]);
+    
+    // default to off (for testing with Xcode debugger attached)
+    if (![IMSKeychain passwordForService:serviceName account:@"dbgCheck"])
+        [IMSKeychain setPassword:@"dbgCheckOff" forService:serviceName account:@"dbgCheck"];
+    
+    if (![IMSKeychain passwordForService:serviceName account:@"jailbreakCheck"])
+        [IMSKeychain setPassword:@"jailbreakCheckOff" forService:serviceName account:@"jailbreakCheck"];
+}
+
 -(void)checkPasscode
 {
     
@@ -112,7 +126,7 @@ NSString* pbName;
     }
     else{
         NSLog(@"isPasscodeSet FALSE");
-        // React to insecure device here
+        // TODO: React to insecure device here
         // Limit functionality, kill app, and/or phone home
     }
 }

@@ -7,9 +7,11 @@
 //
 
 #import "APViewController.h"
-#import "iMASMainViewController.h"
+//#import "iMASMainViewController.h"
+#import "iMASMainTableViewController.h"
 #import <SecurityCheck/SecurityCheck.h>
 #import "iMASAppDelegate.h"
+#import "constants.h"
 
 @interface APViewController ()
 
@@ -79,13 +81,17 @@ void problem() {
         //-----------------------------------
         // jailbreak detection
         //-----------------------------------
-        checkFork(chkCallback);
-        checkFiles(chkCallback);
-        checkLinks(chkCallback);
-        
-        dbgStop;
-        dbgCheck(chkCallback);
-         
+        NSString *jailbreakCheckString = [IMSKeychain passwordForService:serviceName account:@"jailbreakCheck"];
+        if ([jailbreakCheckString isEqualToString:@"jailbreakCheckOn"]) {
+            checkFork(chkCallback);
+            checkFiles(chkCallback);
+            checkLinks(chkCallback);
+        }
+        NSString *dbgCheckString = [IMSKeychain passwordForService:serviceName account:@"dbgCheck"];
+        if ([dbgCheckString isEqualToString:@"dbgCheckOn"]) {
+            dbgStop;
+            dbgCheck(chkCallback);
+        }
     }
 }
 
@@ -111,6 +117,7 @@ bool obj_var = FALSE;
     [super viewDidLoad];
 
     // Do any additional setup after loading the view, typically from a nib.
+    
     [self registerforDeviceLockNotif];
     self.updateTimer = [NSTimer scheduledTimerWithTimeInterval:0.5
                                                         target:self
