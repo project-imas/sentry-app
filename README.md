@@ -22,18 +22,17 @@ Geofencing and location services allow device tracking and can take action if a 
 
 In progress...
 
-After downloading the app, start by inititalizing the cocoapods.  If you have not installed cocoapods yet, see the [cocoapods installation guide](http://guides.cocoapods.org/using/getting-started.html) for instructions.  After cocoapods has been installed, simply run the following command while in the project directory:
+After downloading the repo, start by inititalizing the cocoapods.  If you have not installed cocoapods yet, see the [cocoapods installation guide](http://guides.cocoapods.org/using/getting-started.html) for instructions.  After cocoapods has been installed, simply run the following command while in the project directory:
 
     pod install
 
 This should install all pods needed for the project.  Then open the sentry-app.xcworkspace file (instead of the .xcodeproj file) to work on the app.
 
-
 In order to pair your app with the sentry app's single-sign-on capability, see the [single-sign-on readme](https://github.com/project-imas/single-sign-on) for instructions.
 
 In order to create a customized passcode policy, see the [passcode-check readme](https://github.com/project-imas/passcode-check) for the instructions.
 
-
+System Monitor contains some functions that are not available to the iPhone Simulator, and will cause the app to not run on the Simulator.  Run the app directly on a device instead.  The device has a debugger check, so be prepared for the app to crash if running from xcode.  Open the app from the device to run without the debugger.
 
 ## Future capabilities
 
