@@ -24,13 +24,7 @@ In order to pair your app with the sentry app's single-sign-on capability, see t
 
 In order to create a customized passcode policy, see the [passcode-check readme](https://github.com/project-imas/passcode-check) for the instructions.
 
-System Monitor contains some functions that are not available to the iPhone Simulator, and will cause the app to not run on the Simulator.  Run the app directly on a device instead.  The device has a debugger check, so be prepared for the app to crash if running from xcode.  Open the app from the device to run without the debugger.
-
-## Future capabilities
-
-The [Mobile Device Management Server](https://github.com/project-imas/mdm-server) will have interactions with the SentryApp.  Failed tests can result in the device attempting to "phone home" and report vulnerabilities to the MDM Server.
-
-The MDM Server may also have the capability to send information to the SentryApp, such as defining a new geofence.
+The sentry-app contains code that is not available to iOS simulators, and can not be run on the "iPhone Simulator".  It must be run directly on a real device instead.
 
 ## License
 
