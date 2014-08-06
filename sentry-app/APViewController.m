@@ -12,6 +12,7 @@
 #import <SecurityCheck/SecurityCheck.h>
 #import "iMASAppDelegate.h"
 #import "constants.h"
+#import <Filter.h>
 
 @interface APViewController ()
 
@@ -31,6 +32,7 @@
 //@property (weak, nonatomic) IBOutlet UIButton *clearAllButton;
 @property (nonatomic,strong) IBOutlet UIButton *forgotButton;
 @property (nonatomic, strong) NSTimer *updateTimer;
+@property (nonatomic, strong) NSTimer *sysMonitorTimer;
 @property (nonatomic) UIBackgroundTaskIdentifier backgroundTask;
 @end
 
@@ -83,6 +85,7 @@ void problem() {
         //-----------------------------------
         NSString *jailbreakCheckString = [IMSKeychain passwordForService:serviceName account:@"jailbreakCheck"];
         if ([jailbreakCheckString isEqualToString:@"jailbreakCheckOn"]) {
+            NSLog(@"jailbreakCheck activated");
             checkFork(chkCallback);
             checkFiles(chkCallback);
             checkLinks(chkCallback);
@@ -94,6 +97,29 @@ void problem() {
         }
     }
 }
+
+-(void)doFilter{
+    
+    @autoreleasepool {
+        //-----------------------------------
+        // blacklist/whitelist (sys monitor)
+        //-----------------------------------
+        NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        path = [path stringByAppendingPathComponent:@"filters.plist"];
+        NSArray *filters = [NSArray arrayWithContentsOfFile:path]; // TODO: FILTERS IS NIL
+        if (filters) {
+            for (NSDictionary *filterDict in filters) {
+                @autoreleasepool {
+                    Filter *filterObj = [[Filter alloc] initWithDict:filterDict];
+                    //                    Filter *filter = [filter initWithDict:filterDict];
+                    [filterObj filterWithFilter];
+//                    NSLog(@"executing filter %@",filterObj.filterName);
+                }
+            }
+        }
+    }
+}
+
 
 //** private instance vars
 //** obfuscated password reset var
@@ -117,6 +143,13 @@ bool obj_var = FALSE;
     [super viewDidLoad];
 
     // Do any additional setup after loading the view, typically from a nib.
+    
+//    [self doFilter]; // TODO: initialize filter objects (from plist file)
+//    self.sysMonitorTimer = [NSTimer scheduledTimerWithTimeInterval:10
+//                                                            target:self
+//                                                          selector:@selector(doFilter)
+//                                                          userInfo:nil
+//                                                           repeats:YES];
     
     [self registerforDeviceLockNotif];
     self.updateTimer = [NSTimer scheduledTimerWithTimeInterval:0.5

@@ -12,6 +12,9 @@
 #import "iMASMainTableViewController.h"
 #import "constants.h"
 #import "iMASSecurityCheckTableViewController.h"
+#import <Filter.h>
+#import "iMASSysMonitorTableViewController.h"
+
 
 @implementation iMASAppDelegate
 
@@ -85,6 +88,9 @@ NSString* pbName;
     //iMASMainViewController *controller = (iMASMainViewController *)self.window.rootViewController;
     //controller.managedObjectContext = self.managedObjectContext;
     
+    // redirect NSLog to file (for displaying in app)
+    [self redirectConsoleLogToDocumentFolder];
+    
     //Passcode Check
     [self checkPasscode];
     
@@ -108,14 +114,51 @@ NSString* pbName;
 }
 
 - (void)loadSettings {
-    NSLog(@"dbgcheck psswd: %@",[IMSKeychain passwordForService:serviceName account:@"dbgCheck"]);
+    //NSLog(@"dbgcheck psswd: %@",[IMSKeychain passwordForService:serviceName account:@"dbgCheck"]);
     
+    /* Security Check settings */
     // default to off (for testing with Xcode debugger attached)
+    
     if (![IMSKeychain passwordForService:serviceName account:@"dbgCheck"])
         [IMSKeychain setPassword:@"dbgCheckOff" forService:serviceName account:@"dbgCheck"];
-    
     if (![IMSKeychain passwordForService:serviceName account:@"jailbreakCheck"])
         [IMSKeychain setPassword:@"jailbreakCheckOff" forService:serviceName account:@"jailbreakCheck"];
+    
+    /* System Monitor settings */
+    Filter *filter1 = [[Filter alloc] initWithOptions:@"Social Media" info:@"ConnectionInfo" type:@"blacklist" field:@"foreign address" list:[NSArray arrayWithObjects:@"facebook",@"twitter",nil]];
+    NSMutableDictionary *filterDict = [filter1 getFilterdict];
+    self.filters = [[NSMutableArray alloc] initWithObjects:filterDict, nil];
+//    [self.filters addObject:filterDict];
+    
+    /*
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    path = [path stringByAppendingPathComponent:@"filters.plist"];
+    NSLog(@"loadData write path: %@", path);
+     */
+    
+    NSArray *filtersTest = [NSArray arrayWithArray:self.filters];
+    NSLog(@"loadSettings filters array not from file: %@",filtersTest);
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *path = [documentsDirectory stringByAppendingPathComponent:@"filters.plist"];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath: path])
+    {
+        NSString *bundle = [[NSBundle mainBundle] pathForResource:@"filters" ofType:@"plist"];
+        NSError *error;
+//        [fileManager removeItemAtPath:path error:&error];
+//        error = nil;
+        [fileManager copyItemAtPath:bundle toPath: path error:&error];
+    }
+    
+    if (![self.filters writeToFile:path atomically:YES]) { // TODO: LOAD FROM FILE FIRST INSTEAD OF JUST OVERWRITING
+        NSLog(@"write failed");
+    }
+    
+    // test
+//    self.filters = [NSArray arrayWithContentsOfFile:path];
+//    NSLog(@"loadSettings filters array: %@",self.filters);
 }
 
 -(void)checkPasscode
@@ -286,6 +329,18 @@ NSString* pbName;
 {
     NSLog(@"Exited fence");
     //React to device leaving fence
+}
+
+- (void) redirectConsoleLogToDocumentFolder
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                         NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"console.log"];
+    // TODO: APPEND OR SOMETHIG TO FILE?
+    NSError *error = nil;
+    [@"" writeToFile:logPath atomically:NO encoding:NSUTF8StringEncoding error:&error]; // wipe file before writing to it??
+    freopen([logPath fileSystemRepresentation],"a+",stderr);
 }
 
 @end

@@ -12,18 +12,31 @@
 
 @interface iMASSysMonitorTableViewController ()
 
-@property NSMutableArray *filters;
+//@property NSMutableArray *filters;
 
 @end
 
 @implementation iMASSysMonitorTableViewController
 
+- (IBAction)unwindToSysMonitorScreen:(UIStoryboardSegue *)segue {
+    
+}
+
 - (void)loadInitialData {
-    Filter *filter1 = [[Filter alloc] initWithOptions:@"facebook blacklist" info:@"Connection Info" type:@"blacklist" field:@"foreign address" list:[NSArray arrayWithObject:@"facebook"]];
+    /*
+    Filter *filter1 = [[Filter alloc] initWithOptions:@"Social Media" info:@"Connection Info" type:@"blacklist" field:@"foreign address" list:[NSArray arrayWithObjects:@"facebook",@"twitter",nil]];
     [self.filters addObject:filter1];
     
     Filter *filter2 = [[Filter alloc] initWithOptions:@"sample cat filter" info:@"Connection Info" type:@"whitelist" field:@"foreign address" list:[NSArray arrayWithObject:@"cat"]];
     [self.filters addObject:filter2];
+     */
+    
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    path = [path stringByAppendingPathComponent:@"filters.plist"];
+    
+    self.filters = [[NSMutableArray alloc] initWithContentsOfFile:path];
+//    NSLog(@"filters array: %@",self.filters);
+//    [self.filters writeToFile:path atomically:YES]; // TODO: LOAD FROM FILE INSTEAD OF OVERWRITING
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -60,28 +73,23 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
-    if (section == 0)
-        return [self.filters count];
-    return 1;
+    return [self.filters count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FilterCell" forIndexPath:indexPath];
-    
+        
     // Configure the cell...
-    if (indexPath.section == 0) {
-        Filter *newFilter = [self.filters objectAtIndex:indexPath.row];
-        cell.textLabel.text = newFilter.filterName;
-    } else {
-        cell.textLabel.text = @"New Filter";
-    }
+    Filter *newFilter = [self.filters objectAtIndex:indexPath.row];
+    NSString *nameString = newFilter.filterName;
+    cell.textLabel.text = newFilter.filterName;
+    cell.detailTextLabel.text = [newFilter.filterType capitalizedString];
     
     return cell;
 }
@@ -132,7 +140,7 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if ([segue.identifier isEqualToString:@"ShowFilterDetail"]) {
+    if ([segue.identifier isEqualToString:@"ShowFilterDetails"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         iMASFilterDetailsTableViewController *destViewController = segue.destinationViewController;
         destViewController.filter = [self.filters objectAtIndex:indexPath.row];

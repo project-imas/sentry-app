@@ -1,25 +1,26 @@
 //
-//  iMASFilterDetailsTableViewController.m
+//  iMASNewFilterTableViewController.m
 //  sentry-app
 //
-//  Created by Ren, Alice on 7/30/14.
+//  Created by Ren, Alice on 7/31/14.
 //  Copyright (c) 2014 MITRE Corp. All rights reserved.
 //
 
-#import "iMASFilterDetailsTableViewController.h"
+#import "iMASNewFilterTableViewController.h"
 
-@interface iMASFilterDetailsTableViewController ()
+
+@interface iMASNewFilterTableViewController ()
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 
 @end
 
-@implementation iMASFilterDetailsTableViewController
+@implementation iMASNewFilterTableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
-        
     }
     return self;
 }
@@ -27,8 +28,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.list = self.filter.termList;
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -48,59 +47,40 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 2;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    if (section == 0)
-        return 4;
-    return [self.filter.termList count];
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    NSString *sectionName;
-    switch (section)
-    {
-        case 0:
-            sectionName = @"Filter Information";
-            break;
-        case 1:
-            sectionName = @"Filter Terms";
-            break;
-        default:
-            sectionName = nil;
-            break;
-    }
-    return sectionName;
+    if (section == 0 || section == 2)
+        return 1;
+    else if (section == 4)
+        return [self.filter.termList count]; // TODO change this
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *cellIdentifier = @"FilterDetailCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    NSString *CellIdentifier = @"NewFilterCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+    }
     
     // Configure the cell...
     if (indexPath.section == 0) {
-        if (indexPath.row == 0) {
-            cell.textLabel.text = @"Filter Name";
-            cell.detailTextLabel.text = [self.filter filterName];
-        } else if (indexPath.row == 1) {
-            cell.textLabel.text = @"Filter Type";
-            cell.detailTextLabel.text = [self.filter filterType];
-        } else if (indexPath.row == 2) {
-            cell.textLabel.text = @"Information Type";
-            cell.detailTextLabel.text = [self.filter infoType];
-        } else if (indexPath.row == 3) {
-            cell.textLabel.text = @"Field to search";
-            cell.detailTextLabel.text = [self.filter field];
-        }
-    } else {
-        // load black/whitelist terms
-        cell.textLabel.text = [self.filter.termList objectAtIndex:(indexPath.row)];
-        cell.detailTextLabel.text = nil;
+        UITextField *txtField=[[UITextField alloc]initWithFrame:CGRectMake(5, 5, 320, 39)];
+        txtField.autoresizingMask=UIViewAutoresizingFlexibleHeight;
+        txtField.autoresizesSubviews=YES;
+        txtField.layer.cornerRadius=10.0;
+        [txtField setBorderStyle:UITextBorderStyleRoundedRect];
+        if (indexPath.row == 0)
+            [txtField setPlaceholder:@"Filter Name"];
+        else if (indexPath.row == 1)
+            [txtField setPlaceholder:@"Type Data Here"];
+        [cell.contentView addSubview:txtField];
     }
     
     return cell;
@@ -144,7 +124,6 @@
 }
 */
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -152,7 +131,9 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if (sender != self.doneButton) return;
+    // TODO pass filter information / save it somewhere....(encrypted?)
 }
-*/
+
 
 @end

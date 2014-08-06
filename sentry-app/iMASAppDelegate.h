@@ -25,4 +25,7 @@
 + (NSString*) caller;
 + (NSString*) pasteboardName;
 
+@property NSMutableArray *filters;
+//@property NSDictionary *filtersDict;
+
 @end
