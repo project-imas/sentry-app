@@ -1,6 +1,4 @@
-# iMAS Sentry App[![analytics](http://www.google-analytics.com/collect?v=1&t=pageview&_s=1&dl=https%3A%2F%2Fgithub.com%2Fproject-imas%2Fsentry-app&_u=MAC~&cid=1757014354.1393964045&tid=UA-38868530-1)]()
-
-=========
+# iMAS Sentry Application[![analytics](http://www.google-analytics.com/collect?v=1&t=pageview&_s=1&dl=https%3A%2F%2Fgithub.com%2Fproject-imas%2Fsentry-app&_u=MAC~&cid=1757014354.1393964045&tid=UA-38868530-1)]()
 
 ## Background
 
@@ -8,11 +6,11 @@ The "iMAS Sentry App" provides a simple way to include several of the iMAS secur
 
 The sentry combines the following capabilities into one deployable package: 
  * [Jailbreak and debugger detection](https://github.com/project-imas/security-check)
- * Geofencing
  * [Network and Process monitoring](https://github.com/project-imas/system-monitor)
  * [Device passcode checking](https://github.com/project-imas/passcode-check)
  * [MDM server integration](https://github.com/project-imas/mdm-server)
- * [Single sign on capabilities](https://github.com/project-imas/single-sign-on)
+ * [Single-sign-on capabilities](https://github.com/project-imas/single-sign-on)
+ * Geo-fencing of allowed device regions
 
 ## Installation via CocoaPod
 
