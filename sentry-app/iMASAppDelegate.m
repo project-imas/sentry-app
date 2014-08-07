@@ -114,20 +114,19 @@ NSString* pbName;
 }
 
 - (void)loadSettings {
-    //NSLog(@"dbgcheck psswd: %@",[IMSKeychain passwordForService:serviceName account:@"dbgCheck"]);
-    
     /* Security Check settings */
-    // default to off (for testing with Xcode debugger attached)
     
+    // default to off (for testing with Xcode debugger attached)
     if (![IMSKeychain passwordForService:serviceName account:@"dbgCheck"])
-        [IMSKeychain setPassword:@"dbgCheckOff" forService:serviceName account:@"dbgCheck"];
+        [IMSKeychain setPassword:@"OFF" forService:serviceName account:@"dbgCheck"];
     if (![IMSKeychain passwordForService:serviceName account:@"jailbreakCheck"])
-        [IMSKeychain setPassword:@"jailbreakCheckOff" forService:serviceName account:@"jailbreakCheck"];
+        [IMSKeychain setPassword:@"OFF" forService:serviceName account:@"jailbreakCheck"];
     
     /* System Monitor settings */
+    
+    // demo filter
     Filter *filter1 = [[Filter alloc] initWithOptions:@"Social Media" info:@"ConnectionInfo" type:@"blacklist" field:@"foreign address" list:[NSArray arrayWithObjects:@"facebook",@"twitter",nil]];
-    NSMutableDictionary *filterDict = [filter1 getFilterdict];
-    self.filters = [[NSMutableArray alloc] initWithObjects:filterDict, nil];
+    self.filters = [[NSMutableArray alloc] initWithObjects:filter1, nil];
 //    [self.filters addObject:filterDict];
     
     /*
@@ -136,29 +135,29 @@ NSString* pbName;
     NSLog(@"loadData write path: %@", path);
      */
     
-    NSArray *filtersTest = [NSArray arrayWithArray:self.filters];
-    NSLog(@"loadSettings filters array not from file: %@",filtersTest);
+//    NSArray *filtersTest = [NSArray arrayWithArray:self.filters];
+//    NSLog(@"loadSettings filters array not from file: %@",filtersTest);
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *path = [documentsDirectory stringByAppendingPathComponent:@"filters.plist"];
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
+//        [fileManager removeItemAtPath:path error:&error];
+//        error = nil;
     if (![fileManager fileExistsAtPath: path])
     {
         NSString *bundle = [[NSBundle mainBundle] pathForResource:@"filters" ofType:@"plist"];
         NSError *error;
-//        [fileManager removeItemAtPath:path error:&error];
-//        error = nil;
         [fileManager copyItemAtPath:bundle toPath: path error:&error];
     }
     
     if (![self.filters writeToFile:path atomically:YES]) { // TODO: LOAD FROM FILE FIRST INSTEAD OF JUST OVERWRITING
-        NSLog(@"write failed");
+        NSLog(@"failed to save filter settings to file");
     }
     
     // test
 //    self.filters = [NSArray arrayWithContentsOfFile:path];
-//    NSLog(@"loadSettings filters array: %@",self.filters);
+//    NSLog(@"loadSettings filters array from file: %@",self.filters);
 }
 
 -(void)checkPasscode

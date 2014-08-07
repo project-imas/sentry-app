@@ -40,7 +40,7 @@
 
 @implementation APViewController
 typedef void (^cbBlock) (void);
-
+dispatch_source_t _timer;
 
 
 void problem() {
@@ -84,21 +84,21 @@ void problem() {
         // jailbreak detection
         //-----------------------------------
         NSString *jailbreakCheckString = [IMSKeychain passwordForService:serviceName account:@"jailbreakCheck"];
-        if ([jailbreakCheckString isEqualToString:@"jailbreakCheckOn"]) {
-            NSLog(@"jailbreakCheck activated");
+        if ([jailbreakCheckString isEqualToString:@"ON"]) {
+//            NSLog(@"jailbreakCheck activated");
             checkFork(chkCallback);
             checkFiles(chkCallback);
             checkLinks(chkCallback);
         }
         NSString *dbgCheckString = [IMSKeychain passwordForService:serviceName account:@"dbgCheck"];
-        if ([dbgCheckString isEqualToString:@"dbgCheckOn"]) {
+        if ([dbgCheckString isEqualToString:@"ON"]) {
             dbgStop;
             dbgCheck(chkCallback);
         }
     }
 }
 
--(void)doFilter{
+void filterPolling() {
     
     @autoreleasepool {
         //-----------------------------------
@@ -111,8 +111,7 @@ void problem() {
             for (NSDictionary *filterDict in filters) {
                 @autoreleasepool {
                     Filter *filterObj = [[Filter alloc] initWithDict:filterDict];
-                    //                    Filter *filter = [filter initWithDict:filterDict];
-                    [filterObj filterWithFilter];
+                    [filterObj filter];
 //                    NSLog(@"executing filter %@",filterObj.filterName);
                 }
             }
@@ -138,13 +137,48 @@ bool obj_var = FALSE;
     return self;
 }
 
+dispatch_source_t CreateDispatchTimer(double interval, dispatch_queue_t queue, dispatch_block_t block)
+{
+    dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+    if (timer)
+    {
+        dispatch_source_set_timer(timer, dispatch_time(DISPATCH_TIME_NOW, interval * NSEC_PER_SEC), interval * NSEC_PER_SEC, (1ull * NSEC_PER_SEC) / 10);
+        dispatch_source_set_event_handler(timer, block);
+        dispatch_resume(timer);
+    }
+    return timer;
+}
+
+void startSysMonitorTimer()
+{
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    double secondsToFire = 1.000f;
+    
+    _timer = CreateDispatchTimer(secondsToFire, queue, ^{
+        filterPolling();
+    });
+}
+
+- (void)cancelTimer
+{
+    if (_timer) {
+        dispatch_source_cancel(_timer);
+        // Remove this if you are on a Deployment Target of iOS6 or OSX 10.8 and above
+//        dispatch_release(_timer);
+        _timer = nil;
+    }
+}
+
 
 - (void)     viewDidLoad                {
     [super viewDidLoad];
 
     // Do any additional setup after loading the view, typically from a nib.
     
-//    [self doFilter]; // TODO: initialize filter objects (from plist file)
+    /* TODO: use dispatch queues w/ dispatch timer to run filter (sysmonitor) in background thread */
+    startSysMonitorTimer();
+    
+//    [self filterPolling]; // TODO: initialize filter objects (from plist file)
 //    self.sysMonitorTimer = [NSTimer scheduledTimerWithTimeInterval:10
 //                                                            target:self
 //                                                          selector:@selector(doFilter)

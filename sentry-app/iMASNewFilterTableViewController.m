@@ -56,7 +56,7 @@
     if (section == 0 || section == 2)
         return 1;
     else if (section == 4)
-        return [self.filter.termList count]; // TODO change this
+        return [[[self.filter getFilterdict] objectForKey:@"Terms"] count]; // TODO change this
     return 2;
 }
 
@@ -133,6 +133,7 @@
     // Pass the selected object to the new view controller.
     if (sender != self.doneButton) return;
     // TODO pass filter information / save it somewhere....(encrypted?)
+    // ALSO: check input? (should only have a couple of text fields, though...)
 }
 
 

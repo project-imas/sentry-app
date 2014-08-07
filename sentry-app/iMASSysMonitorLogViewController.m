@@ -37,6 +37,8 @@
     NSError *error = nil;
     NSString *logString = [NSString stringWithContentsOfFile:logPath encoding:NSUTF8StringEncoding error:&error];
     
+    [self.textView setEditable:NO];
+    [self.textView setScrollEnabled:YES];
     [self.textView setText:logString];//[textView setText:logString];
 }
 

@@ -28,7 +28,7 @@
 {
     [super viewDidLoad];
     
-    self.list = self.filter.termList;
+    self.list = [self.filterDict objectForKey:@"Terms"];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -56,7 +56,7 @@
     // Return the number of rows in the section.
     if (section == 0)
         return 4;
-    return [self.filter.termList count];
+    return [[self.filterDict objectForKey:@"Terms"] count];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -82,24 +82,25 @@
     NSString *cellIdentifier = @"FilterDetailCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
+    NSDictionary *filterDict = [NSDictionary dictionaryWithDictionary:self.filterDict];//[self.filter getFilterdict];
     // Configure the cell...
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             cell.textLabel.text = @"Filter Name";
-            cell.detailTextLabel.text = [self.filter filterName];
+            cell.detailTextLabel.text = [filterDict objectForKey:@"Filter name"];
         } else if (indexPath.row == 1) {
             cell.textLabel.text = @"Filter Type";
-            cell.detailTextLabel.text = [self.filter filterType];
+            cell.detailTextLabel.text = [filterDict objectForKey:@"Filter type"];
         } else if (indexPath.row == 2) {
             cell.textLabel.text = @"Information Type";
-            cell.detailTextLabel.text = [self.filter infoType];
+            cell.detailTextLabel.text = [filterDict objectForKey:@"Info type"];
         } else if (indexPath.row == 3) {
             cell.textLabel.text = @"Field to search";
-            cell.detailTextLabel.text = [self.filter field];
+            cell.detailTextLabel.text = [filterDict objectForKey:@"Field"];
         }
     } else {
         // load black/whitelist terms
-        cell.textLabel.text = [self.filter.termList objectAtIndex:(indexPath.row)];
+        cell.textLabel.text = [[filterDict objectForKey:@"Terms"] objectAtIndex:(indexPath.row)];
         cell.detailTextLabel.text = nil;
     }
     

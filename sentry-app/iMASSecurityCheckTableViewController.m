@@ -19,22 +19,22 @@
 - (IBAction)dbgCheckSwitchChanged:(id)sender {
     NSString *dbgCheckState = [IMSKeychain passwordForService:serviceName account:@"dbgCheck"];
     if ([sender isOn]) {
-        if (![dbgCheckState isEqualToString:@"dbgCheckOn"])
-            [IMSKeychain setPassword:@"dbgCheckOn" forService:serviceName account:@"dbgCheck"];
+        if (![dbgCheckState isEqualToString:@"ON"])
+            [IMSKeychain setPassword:@"ON" forService:serviceName account:@"dbgCheck"];
     } else {
-        if (![dbgCheckState isEqualToString:@"dbgCheckOff"])
-            [IMSKeychain setPassword:@"dbgCheckOff" forService:serviceName account:@"dbgCheck"];
+        if (![dbgCheckState isEqualToString:@"OFF"])
+            [IMSKeychain setPassword:@"OFF" forService:serviceName account:@"dbgCheck"];
     }
 }
 
 - (IBAction)jailbreakCheckSwitchChanged:(id)sender {
     NSString *jailbreakCheckState = [IMSKeychain passwordForService:serviceName account:@"jailbreakCheck"];
     if ([sender isOn]) {
-        if (![jailbreakCheckState isEqualToString:@"jailbreakCheckOn"])
-            [IMSKeychain setPassword:@"jailbreakCheckOn" forService:serviceName account:@"jailbreakCheck"];
+        if (![jailbreakCheckState isEqualToString:@"ON"])
+            [IMSKeychain setPassword:@"ON" forService:serviceName account:@"jailbreakCheck"];
     } else {
-        if (![jailbreakCheckState isEqualToString:@"jailbreakCheckOff"])
-            [IMSKeychain setPassword:@"jailbreakCheckOff" forService:serviceName account:@"jailbreakCheck"];
+        if (![jailbreakCheckState isEqualToString:@"OFF"])
+            [IMSKeychain setPassword:@"OFF" forService:serviceName account:@"jailbreakCheck"];
     }
 }
 
@@ -53,14 +53,14 @@
     
     // set switch to position stored in keychain
     NSString *dbgCheckState = [IMSKeychain passwordForService:serviceName account:@"dbgCheck"];
-    if ([dbgCheckState isEqualToString:@"dbgCheckOn"])
+    if ([dbgCheckState isEqualToString:@"ON"])
         [_dbgCheckSwitch setOn:YES];
     else
         [_dbgCheckSwitch setOn:NO];
     
     
     NSString *jailbreakCheckState = [IMSKeychain passwordForService:serviceName account:@"jailbreakCheck"];
-    if ([jailbreakCheckState isEqualToString:@"jailbreakCheckOn"])
+    if ([jailbreakCheckState isEqualToString:@"ON"])
         [_jailbreakCheckSwitch setOn:YES];
     else
         [_jailbreakCheckSwitch setOn:NO];

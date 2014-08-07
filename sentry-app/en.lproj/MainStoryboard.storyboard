@@ -136,6 +136,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="DSX-z1-faH" kind="push" id="vcg-60-0kj"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="E82-B6-bnz" style="IBUITableViewCellStyleDefault" id="ouU-Tk-hq7">
                                         <rect key="frame" x="0.0" y="187" width="320" height="44"/>
@@ -294,7 +297,7 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FilterCell" textLabel="L5s-K9-Xpz" detailTextLabel="rhC-Tv-jCs" style="IBUITableViewCellStyleSubtitle" id="Pba-NA-vz0">
-                                <rect key="frame" x="0.0" y="55" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="119" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Pba-NA-vz0" id="dEw-zr-qJA">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
@@ -327,7 +330,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="System Monitor" id="gw2-3L-vjf">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="7Wu-M6-AGT"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="7Wu-M6-AGT">
+                            <connections>
+                                <segue destination="bmD-nr-MGI" kind="modal" id="Hap-2j-H8Z"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZNO-3x-aKM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -427,7 +434,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gBg-hm-n7c" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="vZD-Aw-Fms" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1787" y="136"/>
+            <point key="canvasLocation" x="1503" y="314"/>
         </scene>
         <!--IMAS Filter Details Table View Controller - Filter Details-->
         <scene sceneID="Tvy-Cb-12T">
@@ -439,7 +446,7 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FilterDetailCell" textLabel="XfF-Eg-3oM" detailTextLabel="yDj-TL-eb2" style="IBUITableViewCellStyleValue1" id="RSG-Ek-D15">
-                                <rect key="frame" x="0.0" y="55" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="119" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RSG-Ek-D15" id="eFn-n6-3gm">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -538,39 +545,22 @@
             <point key="canvasLocation" x="-285" y="874"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="4ad-gJ-mpE">
+        <scene sceneID="orD-1y-XXM">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kbI-mD-vDP" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bmD-nr-MGI" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gna-c7-388">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="BF1-Xz-vFi">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="og4-hL-pgh" kind="relationship" relationship="rootViewController" id="RH5-ya-OBs"/>
+                        <segue destination="og4-hL-pgh" kind="relationship" relationship="rootViewController" id="ZLm-ZF-WFH"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cd4-Kr-neT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dQH-xt-LGP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1383" y="136"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="hLP-7F-h3S">
-            <objects>
-                <viewController id="yca-mn-G3H" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="GU0-6V-7OC"/>
-                        <viewControllerLayoutGuide type="bottom" id="aNa-7g-GF3"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="f4Q-ZG-Jx8">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LNg-Rb-Vtr" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
+            <point key="canvasLocation" x="1113" y="314"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

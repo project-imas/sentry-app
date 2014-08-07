@@ -86,10 +86,11 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FilterCell" forIndexPath:indexPath];
         
     // Configure the cell...
-    Filter *newFilter = [self.filters objectAtIndex:indexPath.row];
-    NSString *nameString = newFilter.filterName;
-    cell.textLabel.text = newFilter.filterName;
-    cell.detailTextLabel.text = [newFilter.filterType capitalizedString];
+//    Filter *newFilter = [self.filters objectAtIndex:indexPath.row];
+    NSDictionary *filterDict = [self.filters objectAtIndex:indexPath.row];
+    NSString *nameString = [filterDict objectForKey:@"Filter name"];
+    cell.textLabel.text = nameString;
+    cell.detailTextLabel.text = [[filterDict objectForKey:@"Filter type"] capitalizedString];
     
     return cell;
 }
@@ -143,7 +144,7 @@
     if ([segue.identifier isEqualToString:@"ShowFilterDetails"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         iMASFilterDetailsTableViewController *destViewController = segue.destinationViewController;
-        destViewController.filter = [self.filters objectAtIndex:indexPath.row];
+        destViewController.filterDict = [self.filters objectAtIndex:indexPath.row];
     }
 }
 

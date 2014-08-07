@@ -11,7 +11,7 @@
 
 @interface iMASFilterDetailsTableViewController : UITableViewController
 
-@property Filter *filter;
+@property NSDictionary *filterDict;
 @property NSArray *list;
 
 @end
