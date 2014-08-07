@@ -1,45 +1,30 @@
-SentryApp
-=========
+# iMAS Sentry Application[![analytics](http://www.google-analytics.com/collect?v=1&t=pageview&_s=1&dl=https%3A%2F%2Fgithub.com%2Fproject-imas%2Fsentry-app&_u=MAC~&cid=1757014354.1393964045&tid=UA-38868530-1)]()
 
-Security for your iDevice.  Combines jailbreak detection, debugger detection, minimum device password requirements, app level password, and single sign on capabilities.
+## Background
 
-SentryApp combines several security projects to create a unique measure of security that cannot be found elsewhere.
+The "iMAS Sentry App" provides a simple way to include several of the iMAS security controls on your device.  The sentry app provides this protection without requiring modifications to existing applications.  It supports communication with external servers, such as the [https://github.com/project-imas/mdm-server](open-source iMAS MDM server), to automatically report and react to known threats.  The level and types of protection are entirely configurable through a GUI system, allowing for simple setup and usage.
 
-[Passcode-check](https://github.com/project-imas/passcode-check) ensures that users have satisfactory device-level password.
+The sentry combines the following capabilities into one deployable package: 
+ * [Jailbreak and debugger detection](https://github.com/project-imas/security-check)
+ * [Network and Process monitoring](https://github.com/project-imas/system-monitor)
+ * [Device passcode checking](https://github.com/project-imas/passcode-check)
+ * [MDM server integration](https://github.com/project-imas/mdm-server)
+ * [Single-sign-on capabilities](https://github.com/project-imas/single-sign-on)
+ * Geo-fencing of allowed device regions
 
-[Security-check](https://github.com/project-imas/security-check) adds jailbreak detection and debugger detection.  If your device is in the wrong hands, your app will still be secure if someone jailbreaks or attempts to use a debugger.
+## Installation via CocoaPod
 
-Geofencing and location services allow device tracking and can take action if a device leaves a designated fence area.
-
-[App-password](https://github.com/project-imas/app-password) protects the SentryApp with an additional password layer to protect the SentryApp settings.  This can be used for a second layer of security, or can allow an admin to setup a device that the user cannot change.
-
-[Single-sign-on](https://github.com/project-imas/single-sign-on) allows the SentryApp to protect your custom apps by requiring the SentryApp to run.  If a device is vulnerable and fails one of the previous tests (device-level password, jailbreak detection, debugger detection, geofencing), then access to the custom app is prevented.
-
-[System-monitor](https://github.com/project-imas/system-monitor) enables the SentryApp to monitor network connections and processess on the iPhone.  Check for malicious processess or unauthorized connections.
-
-
-## Setup
-
-In progress...
-
-After downloading the app, start by inititalizing the cocoapods.  If you have not installed cocoapods yet, see the [cocoapods installation guide](http://guides.cocoapods.org/using/getting-started.html) for instructions.  After cocoapods has been installed, simply run the following command while in the project directory:
+After downloading the repo, start by inititalizing the cocoapods.  If you have not installed cocoapods yet, see the [cocoapods installation guide](http://guides.cocoapods.org/using/getting-started.html) for instructions.  After cocoapods has been installed, simply run the following command while in the project directory:
 
     pod install
 
 This should install all pods needed for the project.  Then open the sentry-app.xcworkspace file (instead of the .xcodeproj file) to work on the app.
 
-
 In order to pair your app with the sentry app's single-sign-on capability, see the [single-sign-on readme](https://github.com/project-imas/single-sign-on) for instructions.
 
 In order to create a customized passcode policy, see the [passcode-check readme](https://github.com/project-imas/passcode-check) for the instructions.
 
-
-
-## Future capabilities
-
-The [Mobile Device Management Server](https://github.com/project-imas/mdm-server) will have interactions with the SentryApp.  Failed tests can result in the device attempting to "phone home" and report vulnerabilities to the MDM Server.
-
-The MDM Server may also have the capability to send information to the SentryApp, such as defining a new geofence.
+The sentry-app contains code that is not available to iOS simulators, and can not be run on the "iPhone Simulator".  It must be run directly on a real device instead.
 
 ## License
 
