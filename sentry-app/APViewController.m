@@ -119,7 +119,7 @@ bool obj_var = FALSE;
 }
 
 -(void) checkUDID {
-    NSString *UDID = [[UIDevice currentDevice] name];
+    NSString *name = [[UIDevice currentDevice] name];
     
     //[self.connection cancel];
     
@@ -134,7 +134,7 @@ bool obj_var = FALSE;
     //NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[url standardizedURL]];
     
 
-    //NSString *postData = [[NSString alloc] initWithFormat:@"UDID=%@", UDID];
+
     
     //NSURL* url = [NSURL URLWithString:@"https://whitealice.org:8080/sentrycheckin"];
     //NSURLRequest* request = [NSURLRequest requestWithURL:url];
@@ -145,6 +145,10 @@ bool obj_var = FALSE;
     
     [request setHTTPMethod:@"Post"];
     //[request setHTTPMethod: @"GET"];
+    
+    NSString *postData = [[NSString alloc] initWithFormat:@"UDID=%@", name];
+    [request setHTTPBody:[name dataUsingEncoding:NSUTF8StringEncoding]];
+    
     
     NSError *requestError;
     NSURLResponse *urlResponse = nil;
