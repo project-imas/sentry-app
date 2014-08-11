@@ -30,6 +30,13 @@
 {
     if (buttonIndex == [alertView cancelButtonIndex]) return;
     
+    if (alertView.tag == 1) {
+        //** pop-up APview controller for questions
+        APViewController *apc = [[APViewController alloc] initWithParameter:RESET_PASSCODE];
+        apc.delegate = (id)self;
+        [self presentViewController:apc animated:YES completion:nil];
+    }
+    
     //** logout
     if (alertView.tag == 2)
     {
@@ -77,10 +84,17 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *tappedCell = [self.tableView cellForRowAtIndexPath:indexPath];
     if (tappedCell == _resetPasscodeCell) {
-        //** pop-up APview controller for questions
-        APViewController *apc = [[APViewController alloc] initWithParameter:RESET_PASSCODE];
-        apc.delegate = (id)self;
-        [self presentViewController:apc animated:YES completion:nil];
+        
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:@"Reset passcode, are you sure?" message:nil delegate:self
+                              cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+        [alert setTag:1];
+        [alert show];
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//        //** pop-up APview controller for questions 
+//        APViewController *apc = [[APViewController alloc] initWithParameter:RESET_PASSCODE];
+//        apc.delegate = (id)self;
+//        [self presentViewController:apc animated:YES completion:nil];
     }
 }
 
