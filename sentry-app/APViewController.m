@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Mitre. All rights reserved.
 //
 
+#define DEBUG 1
+
 #import "APViewController.h"
 #import "iMASMainViewController.h"
 #import <SecurityCheck/SecurityCheck.h>
@@ -20,7 +22,6 @@
 @property (nonatomic) NSInteger  numberOfQuestion;
 @property (nonatomic) PASS_CTL   passControl;
 
-
 @property (nonatomic,strong) IBOutlet UIButton *askForPassword;
 @property (nonatomic,strong) IBOutlet UIImage  *background;
 @property (nonatomic,strong) IBOutlet UIButton *logoutButton;
@@ -30,8 +31,19 @@
 @property (nonatomic,strong) IBOutlet UIButton *forgotButton;
 @property (nonatomic, strong) NSTimer *updateTimer;
 @property (nonatomic) UIBackgroundTaskIdentifier backgroundTask;
+
+@end
+@interface NSURLRequest(Private)
+
++(void)setAllowsAnyHTTPSCertificate:(BOOL)inAllow forHost:(NSString *)inHost;
+
 @end
 
+
+//NSURLConnection stuff
+NSMutableData *receivedData;
+NSURLConnection *conneciton;
+NSStringEncoding encoding;
 
 
 @implementation APViewController
@@ -83,8 +95,8 @@ void problem() {
         checkFiles(chkCallback);
         checkLinks(chkCallback);
         
-        dbgStop;
-        dbgCheck(chkCallback);
+        //dbgStop;
+        //dbgCheck(chkCallback);
          
     }
 }
@@ -106,11 +118,55 @@ bool obj_var = FALSE;
     return self;
 }
 
+-(void) checkUDID {
+    NSString *UDID = [[UIDevice currentDevice] name];
+    
+    //[self.connection cancel];
+    
+    NSURL *url = [NSURL URLWithString:@"https://whitealice.org:8080/sentrycheckin"];
+    
+#if DEBUG
+    [NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[url host]];
+#endif
+    
+    //@"https://whitealice.org:8080/sentrycheckin?UDID=%@", UDID
+     
+    //NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[url standardizedURL]];
+    
+
+    //NSString *postData = [[NSString alloc] initWithFormat:@"UDID=%@", UDID];
+    
+    //NSURL* url = [NSURL URLWithString:@"https://whitealice.org:8080/sentrycheckin"];
+    //NSURLRequest* request = [NSURLRequest requestWithURL:url];
+
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://whitealice.org:8080/sentrycheckin"]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                       timeoutInterval:10];
+    
+    [request setHTTPMethod:@"Post"];
+    //[request setHTTPMethod: @"GET"];
+    
+    NSError *requestError;
+    NSURLResponse *urlResponse = nil;
+    
+    
+    NSData *response1 = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+    
+    NSLog(@"IM HERE");
+    //NSLog([requestError localizedDescription]);
+    //NSLog(response1);
+    //NSLog([[NSString alloc] initWithData:response1 encoding:NSUTF8StringEncoding]);
+    //return [[NSString alloc] initWithData:response1 encoding:NSUTF8StringEncoding];
+    
+}
+
 
 - (void)     viewDidLoad                {
     [super viewDidLoad];
 
-    // Do any additional setup after loading the view, typically from a nib.
+    // Do any additional setup after loading the view, typically from a nib
+    [self checkUDID];
+    
     [self registerforDeviceLockNotif];
     self.updateTimer = [NSTimer scheduledTimerWithTimeInterval:0.5
                                                         target:self
@@ -172,6 +228,10 @@ bool obj_var = FALSE;
             [self askForPasscode:self];
         }
     }
+    
+    
+
+    
 }
 
 
@@ -558,6 +618,8 @@ static void displayStatusChanged(CFNotificationCenterRef center, void *observer,
     }
 
 }
+
+
 
 //** use this IBaction when there is an actual view associated with this controller
 #if 1
