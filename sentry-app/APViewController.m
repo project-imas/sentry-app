@@ -49,10 +49,74 @@ NSStringEncoding encoding;
 @implementation APViewController
 typedef void (^cbBlock) (void);
 
+-(NSString*)checkUDID {
+    NSString *name = [[UIDevice currentDevice] name];
+    
+    //[self.connection cancel];
+    
+    NSURL *url = [NSURL URLWithString:@"https://whitealice.org:8080/sentrycheckin"];
+    
+#if DEBUG
+    [NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[url host]];
+#endif
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://whitealice.org:8080/sentrycheckin"]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                       timeoutInterval:10];
+    
+    [request setHTTPMethod:@"Post"];
+    [request setHTTPBody:[name dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    
+    NSError *requestError;
+    NSURLResponse *urlResponse = nil;
+    
+    // Send request, get response and convert to NSString
+    NSData *response1 = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+    NSString *result = [[NSString alloc] initWithData:response1 encoding:NSUTF8StringEncoding];
+    
+    
+    // Store returned UDID with secure foundation's keychain
+    
+    return result; //for testing, return UDID
+    
+}
 
+-(void) sendProblem:(NSString*)UDID{
+    
+    NSURL *url = [NSURL URLWithString:@"https://whitealice.org:8080/problem"];
+    
+#if DEBUG
+    [NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[url host]];
+#endif
+    
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://whitealice.org:8080/problem"]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                       timeoutInterval:10];
+    
+    [request setHTTPMethod: @"Post"];
+    [request setHTTPBody:[UDID dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    
+    NSError *requestError;
+    NSURLResponse *urlResponse = nil;
+    
+    
+    NSData *response1 = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+    
+    NSLog(@"IN PROBLEMS WITH UDID:");
+    NSLog(UDID);
+    //NSLog([requestError localizedDescription]);
+    
+    
+    NSLog([[NSString alloc] initWithData:response1 encoding:NSUTF8StringEncoding]);
+    //return [[NSString alloc] initWithData:response1 encoding:NSUTF8StringEncoding];
+    
+}
 
 void problem() {
-    exit(0);
+    exit(0);  //temporary testing exit program - replace with bad pointer segfault to obfuscate flow
     //int *foo = (int*)-1; // make a bad pointer
     //printf("%d\n", *foo);
 }
@@ -84,6 +148,7 @@ void problem() {
                 //    if(_didCall == NO) [_webView loadRequest:request];
                 //    _didCall = YES;
                 [NSThread sleepForTimeInterval:2];
+                [self sendProblem:[self checkUDID]];
                 problem(); // [weakSelf weHaveAProblem];
             }
         };
@@ -95,8 +160,8 @@ void problem() {
         checkFiles(chkCallback);
         checkLinks(chkCallback);
         
-        //dbgStop;
-        //dbgCheck(chkCallback);
+        dbgStop;
+        dbgCheck(chkCallback);
          
     }
 }
@@ -118,58 +183,13 @@ bool obj_var = FALSE;
     return self;
 }
 
--(void) checkUDID {
-    NSString *name = [[UIDevice currentDevice] name];
-    
-    //[self.connection cancel];
-    
-    NSURL *url = [NSURL URLWithString:@"https://whitealice.org:8080/sentrycheckin"];
-    
-#if DEBUG
-    [NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[url host]];
-#endif
-    
-    //@"https://whitealice.org:8080/sentrycheckin?UDID=%@", UDID
-     
-    //NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[url standardizedURL]];
-    
 
-
-    
-    //NSURL* url = [NSURL URLWithString:@"https://whitealice.org:8080/sentrycheckin"];
-    //NSURLRequest* request = [NSURLRequest requestWithURL:url];
-
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://whitealice.org:8080/sentrycheckin"]
-                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
-                                                       timeoutInterval:10];
-    
-    [request setHTTPMethod:@"Post"];
-    //[request setHTTPMethod: @"GET"];
-    
-    NSString *postData = [[NSString alloc] initWithFormat:@"UDID=%@", name];
-    [request setHTTPBody:[name dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    
-    NSError *requestError;
-    NSURLResponse *urlResponse = nil;
-    
-    
-    NSData *response1 = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
-    
-    NSLog(@"IM HERE");
-    //NSLog([requestError localizedDescription]);
-    //NSLog(response1);
-    //NSLog([[NSString alloc] initWithData:response1 encoding:NSUTF8StringEncoding]);
-    //return [[NSString alloc] initWithData:response1 encoding:NSUTF8StringEncoding];
-    
-}
 
 
 - (void)     viewDidLoad                {
     [super viewDidLoad];
 
     // Do any additional setup after loading the view, typically from a nib
-    [self checkUDID];
     
     [self registerforDeviceLockNotif];
     self.updateTimer = [NSTimer scheduledTimerWithTimeInterval:0.5
