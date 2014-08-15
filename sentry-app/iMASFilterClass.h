@@ -14,5 +14,7 @@
 + (id) alloc;
 + (NSMutableArray *)loadFilters;
 + (void)writeFilters:(NSArray *)filters;
++ (NSMutableArray *)loadNotifs;
++ (void)writeNotifs:(NSArray *)notifsArray;
 
 @end

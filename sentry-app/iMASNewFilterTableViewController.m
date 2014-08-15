@@ -198,12 +198,10 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle) editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self.filter.termList removeObjectAtIndex:indexPath.row];
-        NSLog(@"term list: %@",self.filter.termList);
         
         // test
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         int tag = [[_tagArray objectAtIndex:indexPath.row] intValue];
-//        NSLog(@"indexPath.row: %d, tag: %d, text: %@", indexPath.row, tag, tf.text);
         UITextField *tf = (UITextField *)[cell viewWithTag:tag];
         if (tf)
             tf.text = @"";

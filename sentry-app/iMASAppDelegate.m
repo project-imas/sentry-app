@@ -88,8 +88,14 @@ NSString* pbName;
     //iMASMainViewController *controller = (iMASMainViewController *)self.window.rootViewController;
     //controller.managedObjectContext = self.managedObjectContext;
     
-    // redirect NSLog to file (for displaying in app)
-//    [self redirectConsoleLogToDocumentFolder];
+    // notifications
+    application.applicationIconBadgeNumber = 0;
+    UILocalNotification *localNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    if (localNotif) {
+//        NSLog(@"Recieved Notification %@",localNotif);
+        // TODO: code to handle notification (bring user to page showing contents of notification?)
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+    }
     
     //Passcode Check
     [self checkPasscode];
@@ -111,6 +117,12 @@ NSString* pbName;
     [self performLaunchSteps];
     
     return YES;
+}
+
+- (void)application:(UIApplication *)app didReceiveLocalNotification:(UILocalNotification *)notif {
+    // TODO: code to handle the notificaton when the app is running
+//    NSLog(@"Recieved Notification %@",notif);
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
 }
 
 - (void)loadSettings {
@@ -343,7 +355,7 @@ NSString* pbName;
                                                          NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"console.log"];
-    // TODO: APPEND OR SOMETHIG TO FILE?
+    // TODO; append to file instead of overwriting?
     NSError *error = nil;
     [@"" writeToFile:logPath atomically:YES encoding:NSUTF8StringEncoding error:&error]; // wipe file before writing to it??
     freopen([logPath fileSystemRepresentation],"a+",stderr);

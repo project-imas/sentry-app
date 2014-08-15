@@ -11,6 +11,7 @@
 		339CBAAE198174D600CCF227 /* passcodeCheckCert.der in Resources */ = {isa = PBXBuildFile; fileRef = 339CBAAD198174D600CCF227 /* passcodeCheckCert.der */; };
 		B4140DAF198953FE00C7897E /* iMASMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4140DAE198953FE00C7897E /* iMASMainTableViewController.m */; };
 		B4354E2A199E54850071022D /* iMASFilterClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B4354E29199E54850071022D /* iMASFilterClass.m */; };
+		B4354E2D199E943C0071022D /* iMASNotifsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4354E2C199E943C0071022D /* iMASNotifsTableViewController.m */; };
 		B445E129198ACB1900A3551E /* iMASNewFilterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B445E128198ACB1900A3551E /* iMASNewFilterTableViewController.m */; };
 		B45BF547198965E100E6A1F5 /* iMASSecurityCheckTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B45BF546198965E100E6A1F5 /* iMASSecurityCheckTableViewController.m */; };
 		B45BF54B1989852000E6A1F5 /* iMASSysMonitorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B45BF54A1989852000E6A1F5 /* iMASSysMonitorTableViewController.m */; };
@@ -52,6 +53,8 @@
 		B4140DAE198953FE00C7897E /* iMASMainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iMASMainTableViewController.m; sourceTree = "<group>"; };
 		B4354E28199E54850071022D /* iMASFilterClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iMASFilterClass.h; sourceTree = "<group>"; };
 		B4354E29199E54850071022D /* iMASFilterClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iMASFilterClass.m; sourceTree = "<group>"; };
+		B4354E2B199E943C0071022D /* iMASNotifsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iMASNotifsTableViewController.h; sourceTree = "<group>"; };
+		B4354E2C199E943C0071022D /* iMASNotifsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iMASNotifsTableViewController.m; sourceTree = "<group>"; };
 		B445E127198ACB1900A3551E /* iMASNewFilterTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iMASNewFilterTableViewController.h; sourceTree = "<group>"; };
 		B445E128198ACB1900A3551E /* iMASNewFilterTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iMASNewFilterTableViewController.m; sourceTree = "<group>"; };
 		B45BF545198965E100E6A1F5 /* iMASSecurityCheckTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iMASSecurityCheckTableViewController.h; sourceTree = "<group>"; };
@@ -133,6 +136,8 @@
 				B445E128198ACB1900A3551E /* iMASNewFilterTableViewController.m */,
 				B4738CE6199263C20063FD68 /* iMASSysMonitorLogViewController.h */,
 				B4738CE7199263C20063FD68 /* iMASSysMonitorLogViewController.m */,
+				B4354E2B199E943C0071022D /* iMASNotifsTableViewController.h */,
+				B4354E2C199E943C0071022D /* iMASNotifsTableViewController.m */,
 			);
 			name = "Custom View Controllers";
 			sourceTree = "<group>";
@@ -348,6 +353,7 @@
 				B45BF54B1989852000E6A1F5 /* iMASSysMonitorTableViewController.m in Sources */,
 				B45BF547198965E100E6A1F5 /* iMASSecurityCheckTableViewController.m in Sources */,
 				FE808B4417C68CA7000A0225 /* main.m in Sources */,
+				B4354E2D199E943C0071022D /* iMASNotifsTableViewController.m in Sources */,
 				B4140DAF198953FE00C7897E /* iMASMainTableViewController.m in Sources */,
 				B4986EB219898E62000663C2 /* iMASFilterDetailsTableViewController.m in Sources */,
 				FE808B4817C68CA7000A0225 /* iMASAppDelegate.m in Sources */,

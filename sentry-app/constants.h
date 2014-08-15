@@ -13,6 +13,7 @@ static NSString *const serviceName = @"org.mitre.imas.sentry-app";
 static NSString *const keyAccountName = @"keyInKeychainAccount";
 static NSString *const origSizeAccountName = @"origSizeAccount";
 static NSString *const isEncryptedAccountName = @"origSizeAccount";
+static NSString *const notifsOrigSizeAccountName = @"notifsSizeAccount";
 
 #import "iMASFilterClass.h"
 
