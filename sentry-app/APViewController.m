@@ -49,8 +49,6 @@ void problem() {
     //printf("%d\n", *foo);
 }
 
-
-
 -(void)detectPolling{
     
     @autoreleasepool {
@@ -106,13 +104,15 @@ void filterPolling() {
         //-----------------------------------
         NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
         path = [path stringByAppendingPathComponent:@"filters.plist"];
-        NSArray *filters = [NSArray arrayWithContentsOfFile:path]; // TODO: FILTERS IS NIL
+        
+        NSArray *filters = [iMASFilterClass loadFilters];
+
         if (filters) {
             for (NSDictionary *filterDict in filters) {
                 @autoreleasepool {
                     Filter *filterObj = [[Filter alloc] initWithDict:filterDict];
                     [filterObj filter];
-//                    NSLog(@"executing filter %@",filterObj.filterName);
+                    NSLog(@"executing filter %@",filterObj.filterName);
                 }
             }
         }
@@ -152,14 +152,14 @@ dispatch_source_t CreateDispatchTimer(double interval, dispatch_queue_t queue, d
 void startSysMonitorTimer()
 {
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    double secondsToFire = 1.000f;
+    double secondsToFire = 10.00f;
     
     _timer = CreateDispatchTimer(secondsToFire, queue, ^{
         filterPolling();
     });
 }
 
-- (void)cancelTimer
+- (void)cancelSysMonitorTimer
 {
     if (_timer) {
         dispatch_source_cancel(_timer);
@@ -175,15 +175,8 @@ void startSysMonitorTimer()
 
     // Do any additional setup after loading the view, typically from a nib.
     
-    /* TODO: use dispatch queues w/ dispatch timer to run filter (sysmonitor) in background thread */
+    /* use dispatch timer to run filter (sysmonitor) in background thread */
     startSysMonitorTimer();
-    
-//    [self filterPolling]; // TODO: initialize filter objects (from plist file)
-//    self.sysMonitorTimer = [NSTimer scheduledTimerWithTimeInterval:10
-//                                                            target:self
-//                                                          selector:@selector(doFilter)
-//                                                          userInfo:nil
-//                                                           repeats:YES];
     
     [self registerforDeviceLockNotif];
     self.updateTimer = [NSTimer scheduledTimerWithTimeInterval:0.5

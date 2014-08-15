@@ -89,7 +89,7 @@ NSString* pbName;
     //controller.managedObjectContext = self.managedObjectContext;
     
     // redirect NSLog to file (for displaying in app)
-    [self redirectConsoleLogToDocumentFolder];
+//    [self redirectConsoleLogToDocumentFolder];
     
     //Passcode Check
     [self checkPasscode];
@@ -114,50 +114,57 @@ NSString* pbName;
 }
 
 - (void)loadSettings {
-    /* Security Check settings */
+    NSData *key;
+    // set wipe = 1 to delete existing filters file and generate a new key
+    int wipe = 0;
+    if (wipe) {
+        NSData *salt = IMSCryptoUtilsPseudoRandomData(8);
+        key = IMSCryptoUtilsPseudoRandomData(8);
+        key = IMSCryptoUtilsDeriveKey(key, kCCKeySizeAES256, salt);
+        [IMSKeychain setPasswordData:key forService:serviceName account:keyAccountName];
+    } else { // FOR EVERY TIME AFTERWARDS, GET KEY FROM KEYCHAIN
+        key = [IMSKeychain passwordDataForService:serviceName account:keyAccountName];
+    }
     
-    // default to off (for testing with Xcode debugger attached)
+    /* Security Check settings (default to off, for testing with Xcode debugger attached) */
     if (![IMSKeychain passwordForService:serviceName account:@"dbgCheck"])
         [IMSKeychain setPassword:@"OFF" forService:serviceName account:@"dbgCheck"];
     if (![IMSKeychain passwordForService:serviceName account:@"jailbreakCheck"])
         [IMSKeychain setPassword:@"OFF" forService:serviceName account:@"jailbreakCheck"];
     
     /* System Monitor settings */
-    
-    // demo filter
-    Filter *filter1 = [[Filter alloc] initWithOptions:@"Social Media" info:@"ConnectionInfo" type:@"blacklist" field:@"foreign address" list:[NSArray arrayWithObjects:@"facebook",@"twitter",nil]];
-    self.filters = [[NSMutableArray alloc] initWithObjects:filter1, nil];
-//    [self.filters addObject:filterDict];
-    
-    /*
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     path = [path stringByAppendingPathComponent:@"filters.plist"];
-    NSLog(@"loadData write path: %@", path);
-     */
-    
-//    NSArray *filtersTest = [NSArray arrayWithArray:self.filters];
-//    NSLog(@"loadSettings filters array not from file: %@",filtersTest);
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *path = [documentsDirectory stringByAppendingPathComponent:@"filters.plist"];
-    
     NSFileManager *fileManager = [NSFileManager defaultManager];
-//        [fileManager removeItemAtPath:path error:&error];
-//        error = nil;
+    NSError *error;
+    if (wipe)
+        [fileManager removeItemAtPath:path error:&error];
+    error = nil;
     if (![fileManager fileExistsAtPath: path])
     {
         NSString *bundle = [[NSBundle mainBundle] pathForResource:@"filters" ofType:@"plist"];
-        NSError *error;
-        [fileManager copyItemAtPath:bundle toPath: path error:&error];
+//        NSError *error;
+        [fileManager copyItemAtPath:bundle toPath:path error:&error];
     }
     
-    if (![self.filters writeToFile:path atomically:YES]) { // TODO: LOAD FROM FILE FIRST INSTEAD OF JUST OVERWRITING
-        NSLog(@"failed to save filter settings to file");
+    if (wipe) {
+        self.filters = [[NSMutableArray alloc] init];
+        // overwrite existing file with new filter(s) — should only be done once, on first run
+        Filter *demoFilter = [[Filter alloc] initWithOptions:@"Social Media" info:CONNECTION_INFO type:BLACKLIST field:FOREIGN_ADDRESS list:[NSArray arrayWithObjects:@"facebook",@"twitter",nil]];
+        NSDictionary *filterDict = [demoFilter getFilterdict];
+        [self.filters addObject:filterDict];
+        
+        [iMASFilterClass writeFilters:self.filters];
+//        NSLog(@"%@",self.filters);
+        
+//        if (![self.filters writeToFile:path atomically:YES]) {
+//            NSLog(@"failed to save filter settings to file");
+//        }
+//        
+//        // encrypt file in place and store new file size (for decryption later)
+//        int orig = IMSCryptoUtilsEncryptFileToPath(path, nil, key);
+//        [IMSKeychain setPassword:[NSString stringWithFormat:@"%d",orig] forService:serviceName account:origSizeAccountName];
     }
-    
-    // test
-//    self.filters = [NSArray arrayWithContentsOfFile:path];
-//    NSLog(@"loadSettings filters array from file: %@",self.filters);
 }
 
 -(void)checkPasscode
@@ -338,7 +345,7 @@ NSString* pbName;
     NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"console.log"];
     // TODO: APPEND OR SOMETHIG TO FILE?
     NSError *error = nil;
-    [@"" writeToFile:logPath atomically:NO encoding:NSUTF8StringEncoding error:&error]; // wipe file before writing to it??
+    [@"" writeToFile:logPath atomically:YES encoding:NSUTF8StringEncoding error:&error]; // wipe file before writing to it??
     freopen([logPath fileSystemRepresentation],"a+",stderr);
 }
 

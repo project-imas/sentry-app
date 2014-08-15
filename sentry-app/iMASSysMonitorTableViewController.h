@@ -10,6 +10,7 @@
 
 @interface iMASSysMonitorTableViewController : UITableViewController
 
-- (IBAction)unwindToSysMonitorScreen:(UIStoryboardSegue *)segue;@property NSMutableArray *filters;
+- (IBAction)unwindToSysMonitorScreen:(UIStoryboardSegue *)segue;
+@property NSMutableArray *filters;
 
 @end

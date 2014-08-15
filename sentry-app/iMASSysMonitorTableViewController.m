@@ -9,38 +9,25 @@
 #import "iMASSysMonitorTableViewController.h"
 #import <Filter.h>
 #import "iMASFilterDetailsTableViewController.h"
+#import <SecureFoundation.h>
+#import "constants.h"
 
 @interface iMASSysMonitorTableViewController ()
-
-//@property NSMutableArray *filters;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *backButton;
 
 @end
 
 @implementation iMASSysMonitorTableViewController
 
 - (IBAction)unwindToSysMonitorScreen:(UIStoryboardSegue *)segue {
-    
+
 }
 
 - (void)loadInitialData {
-    /*
-    Filter *filter1 = [[Filter alloc] initWithOptions:@"Social Media" info:@"Connection Info" type:@"blacklist" field:@"foreign address" list:[NSArray arrayWithObjects:@"facebook",@"twitter",nil]];
-    [self.filters addObject:filter1];
-    
-    Filter *filter2 = [[Filter alloc] initWithOptions:@"sample cat filter" info:@"Connection Info" type:@"whitelist" field:@"foreign address" list:[NSArray arrayWithObject:@"cat"]];
-    [self.filters addObject:filter2];
-     */
-    
-    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    path = [path stringByAppendingPathComponent:@"filters.plist"];
-    
-    self.filters = [[NSMutableArray alloc] initWithContentsOfFile:path];
-//    NSLog(@"filters array: %@",self.filters);
-//    [self.filters writeToFile:path atomically:YES]; // TODO: LOAD FROM FILE INSTEAD OF OVERWRITING
+    self.filters = [iMASFilterClass loadFilters];
 }
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
+- (id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
@@ -48,22 +35,20 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.filters = [[NSMutableArray alloc] init];
-    [self loadInitialData];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.tableView.allowsMultipleSelectionDuringEditing = NO;
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)viewWillAppear:(BOOL)animated {
+    [self loadInitialData];
+    [super viewWillAppear:animated];
+    
+    
+    [self.tableView reloadData];
+}
+
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -84,55 +69,29 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FilterCell" forIndexPath:indexPath];
-        
-    // Configure the cell...
-//    Filter *newFilter = [self.filters objectAtIndex:indexPath.row];
+    
     NSDictionary *filterDict = [self.filters objectAtIndex:indexPath.row];
-    NSString *nameString = [filterDict objectForKey:@"Filter name"];
+    NSString *nameString = [filterDict objectForKey:FILTER_NAME];
     cell.textLabel.text = nameString;
-    cell.detailTextLabel.text = [[filterDict objectForKey:@"Filter type"] capitalizedString];
+    NSString *filterTypeString = [[filterDict objectForKey:FILTER_TYPE] capitalizedString];
+    NSString *infoTypeString = [filterDict objectForKey:FILTER_INFO_TYPE];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@",infoTypeString,filterTypeString];
     
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
+        @synchronized(self.filters) {
+            [self.filters removeObjectAtIndex:indexPath.row];
+            [iMASFilterClass writeFilters:self.filters];
+        }
+        
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    }
 }
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 
 #pragma mark - Navigation
 

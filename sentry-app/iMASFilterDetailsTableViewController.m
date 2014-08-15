@@ -102,6 +102,7 @@
         // load black/whitelist terms
         cell.textLabel.text = [[filterDict objectForKey:@"Terms"] objectAtIndex:(indexPath.row)];
         cell.detailTextLabel.text = nil;
+        [[cell textLabel] setTextColor:[UIColor blackColor]];
     }
     
     return cell;
@@ -144,7 +145,6 @@
     return YES;
 }
 */
-
 /*
 #pragma mark - Navigation
 
@@ -153,7 +153,6 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-}
-*/
+}*/
 
 @end

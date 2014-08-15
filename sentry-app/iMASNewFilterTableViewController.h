@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <Filter.h>
 
-@interface iMASNewFilterTableViewController : UITableViewController
+@interface iMASNewFilterTableViewController : UITableViewController <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UIAlertViewDelegate>
 
 @property Filter *filter;
 

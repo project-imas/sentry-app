@@ -10,5 +10,10 @@
 #define sentry_app_constants_h
 
 static NSString *const serviceName = @"org.mitre.imas.sentry-app";
+static NSString *const keyAccountName = @"keyInKeychainAccount";
+static NSString *const origSizeAccountName = @"origSizeAccount";
+static NSString *const isEncryptedAccountName = @"origSizeAccount";
+
+#import "iMASFilterClass.h"
 
 #endif

@@ -4,16 +4,17 @@
 <array>
 	<dict>
 		<key>Filter name</key>
-		<string></string>
+		<string>Social Media</string>
 		<key>Info type</key>
-		<string></string>
+		<string>ConnectionInfo</string>
 		<key>Filter type</key>
-		<string></string>
+		<string>blacklist</string>
 		<key>Field</key>
-		<string></string>
+		<string>foreign address</string>
 		<key>Terms</key>
 		<array>
-			<string></string>
+			<string>facebook</string>
+			<string>twitter</string>
 		</array>
 	</dict>
 </array>

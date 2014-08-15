@@ -18,6 +18,11 @@
 
 @implementation iMASMainTableViewController
 
+- (IBAction)unwindToMainTable:(UIStoryboardSegue *)unwindSegue
+{
+    
+}
+
 - (IBAction)logoutButtonTapped:(id)sender {
     UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle:@"Logout, are you sure?" message:nil delegate:self
