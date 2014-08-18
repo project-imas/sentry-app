@@ -23,7 +23,8 @@
 -(id)initWithParameter: (BOOL)reset;
 
 @property (weak, nonatomic) id <APViewControllerDelegate> delegate;
-
+void startSysMonitorTimer();
+void cancelSysMonitorTimer();
 
 @end
 

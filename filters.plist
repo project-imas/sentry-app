@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>Filter name</key>
+		<string>Social Media</string>
+		<key>Info type</key>
+		<string>ConnectionInfo</string>
+		<key>Filter type</key>
+		<string>blacklist</string>
+		<key>Field</key>
+		<string>foreign address</string>
+		<key>Terms</key>
+		<array>
+			<string>facebook</string>
+			<string>twitter</string>
+		</array>
+	</dict>
+</array>
+</plist>

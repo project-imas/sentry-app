@@ -9,6 +9,21 @@
 /* Begin PBXBuildFile section */
 		339CBAA9197EBD6700CCF227 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 339CBAA8197EBD6700CCF227 /* CoreLocation.framework */; };
 		339CBAAE198174D600CCF227 /* passcodeCheckCert.der in Resources */ = {isa = PBXBuildFile; fileRef = 339CBAAD198174D600CCF227 /* passcodeCheckCert.der */; };
+		B4140DAF198953FE00C7897E /* iMASMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4140DAE198953FE00C7897E /* iMASMainTableViewController.m */; };
+		B4354E2A199E54850071022D /* iMASFilterClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B4354E29199E54850071022D /* iMASFilterClass.m */; };
+		B4354E2D199E943C0071022D /* iMASNotifsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4354E2C199E943C0071022D /* iMASNotifsTableViewController.m */; };
+		B445E129198ACB1900A3551E /* iMASNewFilterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B445E128198ACB1900A3551E /* iMASNewFilterTableViewController.m */; };
+		B45BF547198965E100E6A1F5 /* iMASSecurityCheckTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B45BF546198965E100E6A1F5 /* iMASSecurityCheckTableViewController.m */; };
+		B45BF54B1989852000E6A1F5 /* iMASSysMonitorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B45BF54A1989852000E6A1F5 /* iMASSysMonitorTableViewController.m */; };
+		B4738CD5198BC39F0063FD68 /* APComplexPass_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4738CCF198BC39F0063FD68 /* APComplexPass_iPad.storyboard */; };
+		B4738CD6198BC39F0063FD68 /* APComplexPass_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4738CD0198BC39F0063FD68 /* APComplexPass_iPhone.storyboard */; };
+		B4738CD7198BC39F0063FD68 /* APQuestionPass_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4738CD1198BC39F0063FD68 /* APQuestionPass_iPad.storyboard */; };
+		B4738CD8198BC39F0063FD68 /* APQuestionPass_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4738CD2198BC39F0063FD68 /* APQuestionPass_iPhone.storyboard */; };
+		B4738CD9198BC39F0063FD68 /* APSimplePass_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4738CD3198BC39F0063FD68 /* APSimplePass_iPad.storyboard */; };
+		B4738CDA198BC39F0063FD68 /* APSimplePass_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4738CD4198BC39F0063FD68 /* APSimplePass_iPhone.storyboard */; };
+		B4738CDC198C09B80063FD68 /* filters.plist in Resources */ = {isa = PBXBuildFile; fileRef = B4738CDB198C09B80063FD68 /* filters.plist */; };
+		B4738CE8199263C20063FD68 /* iMASSysMonitorLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4738CE7199263C20063FD68 /* iMASSysMonitorLogViewController.m */; };
+		B4986EB219898E62000663C2 /* iMASFilterDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4986EB119898E62000663C2 /* iMASFilterDetailsTableViewController.m */; };
 		B4A496EC197EDD6E0091D280 /* libPods-sentry-app.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A496EB197EDD6E0091D280 /* libPods-sentry-app.a */; };
 		FE808B3617C68CA7000A0225 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE808B3517C68CA7000A0225 /* UIKit.framework */; };
 		FE808B3817C68CA7000A0225 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE808B3717C68CA7000A0225 /* Foundation.framework */; };
@@ -34,6 +49,30 @@
 		1B9E5664BF944AA5887CAB7E /* Pods-sentry-app.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sentry-app.xcconfig"; path = "Pods/Pods-sentry-app.xcconfig"; sourceTree = "<group>"; };
 		339CBAA8197EBD6700CCF227 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		339CBAAD198174D600CCF227 /* passcodeCheckCert.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = passcodeCheckCert.der; path = "sentry-app/passcodeCheckCert.der"; sourceTree = "<group>"; };
+		B4140DAD198953FE00C7897E /* iMASMainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iMASMainTableViewController.h; sourceTree = "<group>"; };
+		B4140DAE198953FE00C7897E /* iMASMainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iMASMainTableViewController.m; sourceTree = "<group>"; };
+		B4354E28199E54850071022D /* iMASFilterClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iMASFilterClass.h; sourceTree = "<group>"; };
+		B4354E29199E54850071022D /* iMASFilterClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iMASFilterClass.m; sourceTree = "<group>"; };
+		B4354E2B199E943C0071022D /* iMASNotifsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iMASNotifsTableViewController.h; sourceTree = "<group>"; };
+		B4354E2C199E943C0071022D /* iMASNotifsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iMASNotifsTableViewController.m; sourceTree = "<group>"; };
+		B445E127198ACB1900A3551E /* iMASNewFilterTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iMASNewFilterTableViewController.h; sourceTree = "<group>"; };
+		B445E128198ACB1900A3551E /* iMASNewFilterTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iMASNewFilterTableViewController.m; sourceTree = "<group>"; };
+		B45BF545198965E100E6A1F5 /* iMASSecurityCheckTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iMASSecurityCheckTableViewController.h; sourceTree = "<group>"; };
+		B45BF546198965E100E6A1F5 /* iMASSecurityCheckTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iMASSecurityCheckTableViewController.m; sourceTree = "<group>"; };
+		B45BF548198966DF00E6A1F5 /* constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
+		B45BF5491989852000E6A1F5 /* iMASSysMonitorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iMASSysMonitorTableViewController.h; sourceTree = "<group>"; };
+		B45BF54A1989852000E6A1F5 /* iMASSysMonitorTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iMASSysMonitorTableViewController.m; sourceTree = "<group>"; };
+		B4738CCF198BC39F0063FD68 /* APComplexPass_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = APComplexPass_iPad.storyboard; sourceTree = "<group>"; };
+		B4738CD0198BC39F0063FD68 /* APComplexPass_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = APComplexPass_iPhone.storyboard; sourceTree = "<group>"; };
+		B4738CD1198BC39F0063FD68 /* APQuestionPass_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = APQuestionPass_iPad.storyboard; sourceTree = "<group>"; };
+		B4738CD2198BC39F0063FD68 /* APQuestionPass_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = APQuestionPass_iPhone.storyboard; sourceTree = "<group>"; };
+		B4738CD3198BC39F0063FD68 /* APSimplePass_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = APSimplePass_iPad.storyboard; sourceTree = "<group>"; };
+		B4738CD4198BC39F0063FD68 /* APSimplePass_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = APSimplePass_iPhone.storyboard; sourceTree = "<group>"; };
+		B4738CDB198C09B80063FD68 /* filters.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = filters.plist; sourceTree = "<group>"; };
+		B4738CE6199263C20063FD68 /* iMASSysMonitorLogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iMASSysMonitorLogViewController.h; sourceTree = "<group>"; };
+		B4738CE7199263C20063FD68 /* iMASSysMonitorLogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iMASSysMonitorLogViewController.m; sourceTree = "<group>"; };
+		B4986EB019898E62000663C2 /* iMASFilterDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iMASFilterDetailsTableViewController.h; sourceTree = "<group>"; };
+		B4986EB119898E62000663C2 /* iMASFilterDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iMASFilterDetailsTableViewController.m; sourceTree = "<group>"; };
 		B4A496EB197EDD6E0091D280 /* libPods-sentry-app.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-sentry-app.a"; path = "Pods/build/Release-iphoneos/libPods-sentry-app.a"; sourceTree = "<group>"; };
 		FE808B3217C68CA7000A0225 /* sentry-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sentry-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE808B3517C68CA7000A0225 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -82,9 +121,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B4140DB01989540300C7897E /* Custom View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B4140DAD198953FE00C7897E /* iMASMainTableViewController.h */,
+				B4140DAE198953FE00C7897E /* iMASMainTableViewController.m */,
+				B45BF545198965E100E6A1F5 /* iMASSecurityCheckTableViewController.h */,
+				B45BF546198965E100E6A1F5 /* iMASSecurityCheckTableViewController.m */,
+				B45BF5491989852000E6A1F5 /* iMASSysMonitorTableViewController.h */,
+				B45BF54A1989852000E6A1F5 /* iMASSysMonitorTableViewController.m */,
+				B4986EB019898E62000663C2 /* iMASFilterDetailsTableViewController.h */,
+				B4986EB119898E62000663C2 /* iMASFilterDetailsTableViewController.m */,
+				B445E127198ACB1900A3551E /* iMASNewFilterTableViewController.h */,
+				B445E128198ACB1900A3551E /* iMASNewFilterTableViewController.m */,
+				B4738CE6199263C20063FD68 /* iMASSysMonitorLogViewController.h */,
+				B4738CE7199263C20063FD68 /* iMASSysMonitorLogViewController.m */,
+				B4354E2B199E943C0071022D /* iMASNotifsTableViewController.h */,
+				B4354E2C199E943C0071022D /* iMASNotifsTableViewController.m */,
+			);
+			name = "Custom View Controllers";
+			sourceTree = "<group>";
+		};
 		B417418019784C2F008E62C6 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				B4738CCF198BC39F0063FD68 /* APComplexPass_iPad.storyboard */,
+				B4738CD0198BC39F0063FD68 /* APComplexPass_iPhone.storyboard */,
+				B4738CD1198BC39F0063FD68 /* APQuestionPass_iPad.storyboard */,
+				B4738CD2198BC39F0063FD68 /* APQuestionPass_iPhone.storyboard */,
+				B4738CD3198BC39F0063FD68 /* APSimplePass_iPad.storyboard */,
+				B4738CD4198BC39F0063FD68 /* APSimplePass_iPhone.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -99,12 +165,13 @@
 		FE808B2917C68CA7000A0225 = {
 			isa = PBXGroup;
 			children = (
+				B4738CDB198C09B80063FD68 /* filters.plist */,
 				339CBAAD198174D600CCF227 /* passcodeCheckCert.der */,
 				FEA60A2F17CFCA7700B9AADB /* iMAS_logo_small.png */,
 				FE808B9717C691D7000A0225 /* QuartzCore.framework */,
 				FE808B9517C691CB000A0225 /* Security.framework */,
 				B417418019784C2F008E62C6 /* Storyboards */,
-				FE808B3D17C68CA7000A0225 /* SingleSignOn */,
+				FE808B3D17C68CA7000A0225 /* SentryApp */,
 				FE808B3417C68CA7000A0225 /* Frameworks */,
 				FE808B3317C68CA7000A0225 /* Products */,
 				1B9E5664BF944AA5887CAB7E /* Pods-sentry-app.xcconfig */,
@@ -132,23 +199,27 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		FE808B3D17C68CA7000A0225 /* SingleSignOn */ = {
+		FE808B3D17C68CA7000A0225 /* SentryApp */ = {
 			isa = PBXGroup;
 			children = (
+				FE808B3E17C68CA7000A0225 /* Supporting Files */,
 				B433F47B19784D6B00D799E9 /* iPad */,
+				FE808B4F17C68CA7000A0225 /* MainStoryboard.storyboard */,
 				FE808B9917C6928E000A0225 /* APViewController.h */,
 				FE808B9A17C6928E000A0225 /* APViewController.m */,
 				FE808B4617C68CA7000A0225 /* iMASAppDelegate.h */,
 				FE808B4717C68CA7000A0225 /* iMASAppDelegate.m */,
-				FE808B4F17C68CA7000A0225 /* MainStoryboard.storyboard */,
 				FE808B5517C68CA7000A0225 /* iMASMainViewController.h */,
 				FE808B5617C68CA7000A0225 /* iMASMainViewController.m */,
 				FE808B5817C68CA7000A0225 /* iMASFlipsideViewController.h */,
 				FE808B5917C68CA7000A0225 /* iMASFlipsideViewController.m */,
 				FE808B5217C68CA7000A0225 /* SingleSignOn.xcdatamodeld */,
-				FE808B3E17C68CA7000A0225 /* Supporting Files */,
+				B4140DB01989540300C7897E /* Custom View Controllers */,
+				B45BF548198966DF00E6A1F5 /* constants.h */,
+				B4354E28199E54850071022D /* iMASFilterClass.h */,
+				B4354E29199E54850071022D /* iMASFilterClass.m */,
 			);
-			name = SingleSignOn;
+			name = SentryApp;
 			path = "sentry-app";
 			sourceTree = "<group>";
 		};
@@ -222,9 +293,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE808B4217C68CA7000A0225 /* InfoPlist.strings in Resources */,
+				B4738CD5198BC39F0063FD68 /* APComplexPass_iPad.storyboard in Resources */,
+				B4738CD9198BC39F0063FD68 /* APSimplePass_iPad.storyboard in Resources */,
 				339CBAAE198174D600CCF227 /* passcodeCheckCert.der in Resources */,
+				B4738CD8198BC39F0063FD68 /* APQuestionPass_iPhone.storyboard in Resources */,
+				B4738CDA198BC39F0063FD68 /* APSimplePass_iPhone.storyboard in Resources */,
+				B4738CDC198C09B80063FD68 /* filters.plist in Resources */,
 				FE808B4A17C68CA7000A0225 /* Default.png in Resources */,
 				FE808B4C17C68CA7000A0225 /* Default@2x.png in Resources */,
+				B4738CD6198BC39F0063FD68 /* APComplexPass_iPhone.storyboard in Resources */,
+				B4738CD7198BC39F0063FD68 /* APQuestionPass_iPad.storyboard in Resources */,
 				FE808B4E17C68CA7000A0225 /* Default-568h@2x.png in Resources */,
 				FE808B5117C68CA7000A0225 /* MainStoryboard.storyboard in Resources */,
 				FEA60A2617CFC50200B9AADB /* iMAS_logo_small.png in Resources */,
@@ -271,9 +349,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4738CE8199263C20063FD68 /* iMASSysMonitorLogViewController.m in Sources */,
+				B45BF54B1989852000E6A1F5 /* iMASSysMonitorTableViewController.m in Sources */,
+				B45BF547198965E100E6A1F5 /* iMASSecurityCheckTableViewController.m in Sources */,
 				FE808B4417C68CA7000A0225 /* main.m in Sources */,
+				B4354E2D199E943C0071022D /* iMASNotifsTableViewController.m in Sources */,
+				B4140DAF198953FE00C7897E /* iMASMainTableViewController.m in Sources */,
+				B4986EB219898E62000663C2 /* iMASFilterDetailsTableViewController.m in Sources */,
 				FE808B4817C68CA7000A0225 /* iMASAppDelegate.m in Sources */,
+				B4354E2A199E54850071022D /* iMASFilterClass.m in Sources */,
 				FE808B5417C68CA7000A0225 /* SingleSignOn.xcdatamodeld in Sources */,
+				B445E129198ACB1900A3551E /* iMASNewFilterTableViewController.m in Sources */,
 				FE808B5717C68CA7000A0225 /* iMASMainViewController.m in Sources */,
 				FE808B5A17C68CA7000A0225 /* iMASFlipsideViewController.m in Sources */,
 				FE808B9B17C6928E000A0225 /* APViewController.m in Sources */,

@@ -8,8 +8,12 @@
 
 #import "iMASAppDelegate.h"
 #import "APViewController.h"
-#import "iMASMainViewController.h"
-
+//#import "iMASMainViewController.h"
+#import "iMASMainTableViewController.h"
+#import "constants.h"
+#import "iMASSecurityCheckTableViewController.h"
+#import <Filter.h>
+#import "iMASSysMonitorTableViewController.h"
 
 
 @implementation iMASAppDelegate
@@ -71,10 +75,9 @@ NSString* pbName;
 - (void)validUserAccess:(APViewController *)controller {
     NSLog(@"validUserAccess - Delegate");
 
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-    id contID = [storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
-
-    self.window.rootViewController = contID;
+    UINavigationController *loginController = [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"MainTableViewController"];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:loginController];
+    self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
 }
 
@@ -85,8 +88,20 @@ NSString* pbName;
     //iMASMainViewController *controller = (iMASMainViewController *)self.window.rootViewController;
     //controller.managedObjectContext = self.managedObjectContext;
     
+    // notifications
+    application.applicationIconBadgeNumber = 0;
+    UILocalNotification *localNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    if (localNotif) {
+//        NSLog(@"Recieved Notification %@",localNotif);
+        // TODO: code to handle notification (bring user to page showing contents of notification?)
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+    }
+    
     //Passcode Check
     [self checkPasscode];
+    
+    // store/load settings for sentry app (in keychain?)
+    [self loadSettings];
     
     //Geolocation
     locationManager = [[CLLocationManager alloc]init];
@@ -104,6 +119,66 @@ NSString* pbName;
     return YES;
 }
 
+- (void)application:(UIApplication *)app didReceiveLocalNotification:(UILocalNotification *)notif {
+    // TODO: code to handle the notificaton when the app is running
+//    NSLog(@"Recieved Notification %@",notif);
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+}
+
+- (void)loadSettings {
+    NSData *key;
+    // set wipe = 1 to delete existing filters file and generate a new key
+    int wipe = 0;
+    if (wipe) {
+        NSData *salt = IMSCryptoUtilsPseudoRandomData(8);
+        key = IMSCryptoUtilsPseudoRandomData(8);
+        key = IMSCryptoUtilsDeriveKey(key, kCCKeySizeAES256, salt);
+        [IMSKeychain setPasswordData:key forService:serviceName account:keyAccountName];
+    } else { // FOR EVERY TIME AFTERWARDS, GET KEY FROM KEYCHAIN
+        key = [IMSKeychain passwordDataForService:serviceName account:keyAccountName];
+    }
+    
+    /* Security Check settings (default to off, for testing with Xcode debugger attached) */
+    if (![IMSKeychain passwordForService:serviceName account:@"dbgCheck"])
+        [IMSKeychain setPassword:@"OFF" forService:serviceName account:@"dbgCheck"];
+    if (![IMSKeychain passwordForService:serviceName account:@"jailbreakCheck"])
+        [IMSKeychain setPassword:@"OFF" forService:serviceName account:@"jailbreakCheck"];
+    
+    /* System Monitor settings */
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    path = [path stringByAppendingPathComponent:@"filters.plist"];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSError *error;
+    if (wipe)
+        [fileManager removeItemAtPath:path error:&error];
+    error = nil;
+    if (![fileManager fileExistsAtPath: path])
+    {
+        NSString *bundle = [[NSBundle mainBundle] pathForResource:@"filters" ofType:@"plist"];
+//        NSError *error;
+        [fileManager copyItemAtPath:bundle toPath:path error:&error];
+    }
+    
+    if (wipe) {
+        self.filters = [[NSMutableArray alloc] init];
+        // overwrite existing file with new filter(s) — should only be done once, on first run
+        Filter *demoFilter = [[Filter alloc] initWithOptions:@"Social Media" info:CONNECTION_INFO type:BLACKLIST field:FOREIGN_ADDRESS list:[NSArray arrayWithObjects:@"facebook",@"twitter",nil]];
+        NSDictionary *filterDict = [demoFilter getFilterdict];
+        [self.filters addObject:filterDict];
+        
+        [iMASFilterClass writeFilters:self.filters];
+//        NSLog(@"%@",self.filters);
+        
+//        if (![self.filters writeToFile:path atomically:YES]) {
+//            NSLog(@"failed to save filter settings to file");
+//        }
+//        
+//        // encrypt file in place and store new file size (for decryption later)
+//        int orig = IMSCryptoUtilsEncryptFileToPath(path, nil, key);
+//        [IMSKeychain setPassword:[NSString stringWithFormat:@"%d",orig] forService:serviceName account:origSizeAccountName];
+    }
+}
+
 -(void)checkPasscode
 {
     
@@ -112,7 +187,7 @@ NSString* pbName;
     }
     else{
         NSLog(@"isPasscodeSet FALSE");
-        // React to insecure device here
+        // TODO: React to insecure device here
         // Limit functionality, kill app, and/or phone home
     }
 }
@@ -272,6 +347,18 @@ NSString* pbName;
 {
     NSLog(@"Exited fence");
     //React to device leaving fence
+}
+
+- (void) redirectConsoleLogToDocumentFolder
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                         NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"console.log"];
+    // TODO; append to file instead of overwriting?
+    NSError *error = nil;
+    [@"" writeToFile:logPath atomically:YES encoding:NSUTF8StringEncoding error:&error]; // wipe file before writing to it??
+    freopen([logPath fileSystemRepresentation],"a+",stderr);
 }
 
 @end
