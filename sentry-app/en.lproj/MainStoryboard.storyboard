@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="ghS-Um-8T4">
     <dependencies>
-        <deployment defaultVersion="1552" identifier="iOS"/>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
@@ -308,7 +308,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Security Checks" id="LKt-TP-94A"/>
                     <connections>
-                        <outlet property="dbgCheckSwitch" destination="meQ-u4-7u4" id="Gtq-5i-ZR0"/>
+                        <outlet property="dbgCheckSwitch" destination="7gH-cD-VgP" id="DwZ-X7-W3E"/>
                         <outlet property="jailbreakCheckSwitch" destination="meQ-u4-7u4" id="mFZ-EB-Kwo"/>
                     </connections>
                 </tableViewController>

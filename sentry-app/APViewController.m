@@ -77,12 +77,11 @@ void problem() {
                 problem(); // [weakSelf weHaveAProblem];
             }
         };
-        
         //-----------------------------------
         // jailbreak detection
         //-----------------------------------
         NSString *jailbreakCheckString = [IMSKeychain passwordForService:serviceName account:@"jailbreakCheck"];
-        if ([jailbreakCheckString isEqualToString:@"ON"]) {
+      if ([jailbreakCheckString isEqualToString:@"ON"]) {
 //            NSLog(@"jailbreakCheck activated");
             checkFork(chkCallback);
             checkFiles(chkCallback);
@@ -90,8 +89,9 @@ void problem() {
         }
         NSString *dbgCheckString = [IMSKeychain passwordForService:serviceName account:@"dbgCheck"];
         if ([dbgCheckString isEqualToString:@"ON"]) {
-            dbgStop;
+  //          dbgStop;
             dbgCheck(chkCallback);
+ 
         }
     }
 }
