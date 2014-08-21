@@ -84,6 +84,9 @@ typedef void (^cbBlock) (void);
 
 -(void) sendProblem:(NSString*)UDID{
     
+    //DEBUG
+    NSString *problemType = @"jailbreak";
+    
     NSURL *url = [NSURL URLWithString:@"https://whitealice.org:8080/problem"];
     
 #if DEBUG
@@ -96,7 +99,12 @@ typedef void (^cbBlock) (void);
                                                        timeoutInterval:10];
     
     [request setHTTPMethod: @"Post"];
-    [request setHTTPBody:[UDID dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    //NSString *postdata = [NSString stringWithFormat:@"UDID=%s&type=%s", UDID, problemType];
+    NSString *postdata = [[[@"UDID=" stringByAppendingString:UDID] stringByAppendingString:@"&type="] stringByAppendingString:problemType];
+    
+    [request setHTTPBody:[postdata dataUsingEncoding:NSUTF8StringEncoding]];
+    //[request setHTTPBody:[UDID dataUsingEncoding:NSUTF8StringEncoding]];
     
     
     NSError *requestError;
