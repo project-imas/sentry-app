@@ -26,7 +26,7 @@ EXTERNAL SOURCES:
     :git: https://github.com/project-imas/system-monitor.git
 
 SPEC CHECKSUMS:
-  AppPassword: 4b8f139b05cc4f950504f191f0023eda41d7ca07
+  AppPassword: 608a4a9a8f9335e07b6d4903e60f6a222d2ca200
   PasscodeCheck: 0076bcee801ab527f1a655100689b00a9c092626
   SecureFoundation: a4787ae62a44da9b6bc98d75a31acb56a9ebe3d7
   SecurityCheck: 942207c5add2273a2515aa1d7a009292a0322924

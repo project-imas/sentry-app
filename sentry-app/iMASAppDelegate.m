@@ -14,6 +14,7 @@
 #import "iMASSecurityCheckTableViewController.h"
 #import <Filter.h>
 #import "iMASSysMonitorTableViewController.h"
+#import "iMASNotifsTableViewController.h"
 
 
 @implementation iMASAppDelegate
@@ -103,20 +104,26 @@ NSString* pbName;
     // store/load settings for sentry app (in keychain?)
     [self loadSettings];
     
-    //Geolocation
-    locationManager = [[CLLocationManager alloc]init];
-    CLLocationCoordinate2D coordinates = { .latitude = 37.33, .longitude = -122.02 };
-    region = [[CLCircularRegion alloc] initWithCenter:coordinates radius:10. identifier:@"Fence"];
+    if ([[IMSKeychain passwordForService:serviceName account:@"geofencingSwitch"] isEqualToString:@"ON"]) {
+        
+        // retrieve latitude,longitude, and radius
+        float latitude = [[IMSKeychain passwordForService:serviceName  account:@"latitude"] floatValue];
+        float longitude = [[IMSKeychain passwordForService:serviceName account:@"longitude"] floatValue];
+        float radius = [[IMSKeychain passwordForService:serviceName account:@"radius"] floatValue];
     
-    locationManager.delegate = self;
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    [locationManager startUpdatingLocation];
-    [locationManager startMonitoringForRegion:region];
+        //Geolocation
+        locationManager = [[CLLocationManager alloc]init];
+        CLLocationCoordinate2D coordinates = { .latitude = latitude, .longitude = longitude};
+        region = [[CLCircularRegion alloc] initWithCenter:coordinates radius:radius identifier:@"Fence"];
     
+        locationManager.delegate = self;
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        [locationManager startUpdatingLocation];
+        [locationManager startMonitoringForRegion:region];
+    }
+        [self performLaunchSteps];
     
-    [self performLaunchSteps];
-    
-    return YES;
+        return YES;
 }
 
 - (void)application:(UIApplication *)app didReceiveLocalNotification:(UILocalNotification *)notif {
@@ -335,16 +342,18 @@ NSString* pbName;
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    //NSLog(@"Update: %@", locations.lastObject);
+    NSLog(@"Update: %@", locations.lastObject);
 }
 
 - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
 {
+    [iMASNotifsTableViewController insertToNotifs:@"Entered geofenced region." shouldCrash:NO];
     NSLog(@"Entered fence");
 }
 
 - (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
 {
+    [iMASNotifsTableViewController insertToNotifs:@"Exited geofenced region." shouldCrash:YES];
     NSLog(@"Exited fence");
     //React to device leaving fence
 }

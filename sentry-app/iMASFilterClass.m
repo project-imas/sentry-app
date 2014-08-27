@@ -25,7 +25,7 @@
 
 + (NSMutableArray *)loadFilters {
     static NSMutableArray *filters = nil;
-    static dispatch_once_t      dToken;
+    static dispatch_once_t dToken;
     
     dispatch_once(&dToken, ^{
         
@@ -61,7 +61,7 @@
 
 + (NSMutableArray *)loadNotifs {
     static NSMutableArray *notifs = nil;
-    static dispatch_once_t      dToken;
+    static dispatch_once_t dToken;
     
     dispatch_once(&dToken, ^{
         
@@ -83,16 +83,25 @@
 
 + (void)writeNotifs:(NSArray *)notifsArray {
     if (!notifsArray) return;
+    static dispatch_once_t dToken;
     
-    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    path = [path stringByAppendingPathComponent:@"notifs_file"];
-    NSData *key = [IMSKeychain passwordDataForService:serviceName account:keyAccountName];
+    dispatch_once(&dToken, ^{
+
+        NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        path = [path stringByAppendingPathComponent:@"notifs_file"];
+        NSData *key = [IMSKeychain passwordDataForService:serviceName account:keyAccountName];
     
-    if (![notifsArray writeToFile:path atomically:YES])
-        NSLog(@"failed to write notifications to file");
+        if (![notifsArray writeToFile:path atomically:YES])
+            NSLog(@"failed to write notifications to file");
     
-    int newSize  = IMSCryptoUtilsEncryptFileToPath(path, nil, key);
-    [IMSKeychain setPassword:[NSString stringWithFormat:@"%d",newSize] forService:serviceName account:notifsOrigSizeAccountName];
+        int newSize  = IMSCryptoUtilsEncryptFileToPath(path, nil, key);
+        [IMSKeychain setPassword:[NSString stringWithFormat:@"%d",newSize] forService:serviceName account:notifsOrigSizeAccountName];
+    });
+
 }
 
+//Joe
++ (void)retrieveAlerts:(NSString *)alert {
+    NSLog(@"%@", alert);
+}
 @end

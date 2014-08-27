@@ -17,4 +17,8 @@
 + (NSMutableArray *)loadNotifs;
 + (void)writeNotifs:(NSArray *)notifsArray;
 
+//Joe
++(void)retrieveAlerts:(NSString *)alert;
+
+
 @end

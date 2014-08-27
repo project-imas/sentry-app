@@ -13,6 +13,8 @@
 #import "iMASAppDelegate.h"
 #import "constants.h"
 #import <Filter.h>
+#import "iMASNotifsTableViewController.h"
+#import "iMASFilterClass.h"
 
 @interface APViewController ()
 
@@ -34,14 +36,32 @@
 @property (nonatomic, strong) NSTimer *updateTimer;
 @property (nonatomic, strong) NSTimer *sysMonitorTimer;
 @property (nonatomic) UIBackgroundTaskIdentifier backgroundTask;
+
 @end
 
+@interface NSURLRequest(Private)
 
++(void)setAllowsAnyHTTPSCertificate:(BOOL)inAllow forHost:(NSString *)inHost;
+
+@end
+
+//NSURLConnection stuff
+NSMutableData *receivedData;
+NSURLConnection *conneciton;
+NSStringEncoding encoding;
 
 @implementation APViewController
 typedef void (^cbBlock) (void);
 dispatch_source_t _timer;
 
+static int debuggerState = 0;
+// debugger states:
+const int START = 0;
+const int ATTACHED = 1;
+const int DETACHED = 2;
+static bool debuggerAttached;
+
+static bool jailbroken;
 
 void problem() {
     exit(0);
@@ -53,10 +73,10 @@ void problem() {
     
     @autoreleasepool {
 
-        //-----------------------------------
-        // call back to weHaveAProblem
-        //-----------------------------------
-        cbBlock chkCallback  = ^{
+        //---------------------------------------------------
+        // call back to weHaveAProblem for jailbroken device
+        //---------------------------------------------------
+        cbBlock chkJailbreakCallback  = ^{
             
             
             __weak id weakSelf = self;
@@ -74,24 +94,63 @@ void problem() {
                 //    if(_didCall == NO) [_webView loadRequest:request];
                 //    _didCall = YES;
                 [NSThread sleepForTimeInterval:2];
-                problem(); // [weakSelf weHaveAProblem];
+                if(!jailbroken){
+                    [iMASNotifsTableViewController insertToNotifs:@"Phone is jailbroken." shouldCrash:YES];
+                    jailbroken = true;                }
+    //            problem(); // [weakSelf weHaveAProblem];
             }
         };
         //-----------------------------------
         // jailbreak detection
         //-----------------------------------
         NSString *jailbreakCheckString = [IMSKeychain passwordForService:serviceName account:@"jailbreakCheck"];
-      if ([jailbreakCheckString isEqualToString:@"ON"]) {
-//            NSLog(@"jailbreakCheck activated");
-            checkFork(chkCallback);
-            checkFiles(chkCallback);
-            checkLinks(chkCallback);
+        if ([jailbreakCheckString isEqualToString:@"ON"] && !jailbroken) {
+            //            NSLog(@"jailbreakCheck activated");
+            checkFork(chkJailbreakCallback);
+            checkFiles(chkJailbreakCallback);
+            checkLinks(chkJailbreakCallback);
         }
+        
+        //-------------------------------------------------------------
+        // call back to weHaveAProblem for device attached to debugger
+        //-------------------------------------------------------------
+        cbBlock chkDebugCallback  = ^{
+            
+            __weak id weakSelf = self;
+            
+            if (weakSelf) {
+                UIPasteboard *appPasteBoard = [UIPasteboard pasteboardWithName:@"iMAS_SSO" create:YES];
+                appPasteBoard.persistent = NO;
+                [appPasteBoard setString:@""];
+                
+                // phoneHome
+                //NSURL* url = [NSURL URLWithString:@"https://HOST:8080/problem"];
+                
+                //NSURLRequest* request = [NSURLRequest requestWithURL:url];
+                
+                //    if(_didCall == NO) [_webView loadRequest:request];
+                //    _didCall = YES;
+                [NSThread sleepForTimeInterval:2];
+                //            problem(); // [weakSelf weHaveAProblem];
+                debuggerAttached = true;
+                if (debuggerState == START || debuggerState == DETACHED) {
+                    debuggerState = ATTACHED;
+                    [iMASNotifsTableViewController insertToNotifs:@"Debugger attached." shouldCrash:YES];
+                }
+            }
+        };
+        //-----------------------------------
+        // debugger detection
+        //-----------------------------------
         NSString *dbgCheckString = [IMSKeychain passwordForService:serviceName account:@"dbgCheck"];
-        if ([dbgCheckString isEqualToString:@"ON"]) {
-  //          dbgStop;
-            dbgCheck(chkCallback);
- 
+        if ([dbgCheckString isEqualToString:@"ON"] && !debuggerAttached) {
+                if(debuggerState == ATTACHED){
+                    debuggerState = DETACHED;
+                    [iMASNotifsTableViewController insertToNotifs:@"Debugger detached." shouldCrash:NO];
+                }
+            //          dbgStop;
+            debuggerAttached = false;
+            dbgCheck(chkDebugCallback);
         }
     }
 }
@@ -112,7 +171,7 @@ void filterPolling() {
                 @autoreleasepool {
                     Filter *filterObj = [[Filter alloc] initWithDict:filterDict];
                     [filterObj filter];
-                    NSLog(@"executing filter %@",filterObj.filterName);
+                  //  NSLog(@"executing filter %@",filterObj.filterName);
                 }
             }
         }
@@ -169,6 +228,70 @@ void startSysMonitorTimer()
     }
 }
 
+-(NSString*)checkUDID {
+    NSString *name = [[UIDevice currentDevice] name];
+    NSString *temp = [IMSKeychain passwordForService:serviceName account:@"MDMURL"];
+    
+    NSURL *url = [NSURL URLWithString:[temp stringByAppendingString:@"/sentrycheckin"]];
+    
+#if DEBUG
+    [NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[url host]];
+#endif
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                       timeoutInterval:10];
+    
+    [request setHTTPMethod:@"Post"];
+    [request setHTTPBody:[name dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    
+    NSError *requestError;
+    NSURLResponse *urlResponse = nil;
+    
+    // Send request, get response and convert to NSString
+    NSData *response1 = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+    NSString *result = [[NSString alloc] initWithData:response1 encoding:NSUTF8StringEncoding];
+    
+    
+    // Store returned UDID with secure foundation's keychain
+    
+    return result; //for testing, return UDID
+    
+}
+
+
+-(void) sendProblem:(NSString*)UDID withProblem:(NSString*)problemType{
+    NSString *temp = [IMSKeychain passwordForService:serviceName account:@"MDMURL"];
+    
+    NSURL *url = [NSURL URLWithString:[temp stringByAppendingString:@"/sentrycheckin"]];
+    
+#if DEBUG
+    [NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[url host]];
+#endif
+    
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                       timeoutInterval:10];
+    
+    [request setHTTPMethod: @"Post"];
+    NSString *postdata = [[[@"UDID=" stringByAppendingString:UDID] stringByAppendingString:@"&type="] stringByAppendingString:problemType];
+    [request setHTTPBody:[postdata dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    
+    NSError *requestError;
+    NSURLResponse *urlResponse = nil;
+    
+    NSData *response1 = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+    
+    // Log for debugging
+    NSLog(@"IN PROBLEMS WITH UDID:");
+    NSLog(UDID);
+    NSLog([[NSString alloc] initWithData:response1 encoding:NSUTF8StringEncoding]);
+    
+    
+}
 
 - (void)     viewDidLoad                {
     [super viewDidLoad];
@@ -238,7 +361,7 @@ void startSysMonitorTimer()
             //** uncomment to automatically launch the passcode dialog
             [self askForPasscode:self];
         }
-    }
+    }    
 }
 
 

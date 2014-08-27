@@ -10,6 +10,6 @@
 
 @interface iMASNotifsTableViewController : UITableViewController
 
-@property NSMutableArray *oldNotifs;
++(void)insertToNotifs:(NSString *)newNotif shouldCrash:(BOOL)crash;
 
 @end

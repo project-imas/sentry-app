@@ -64,7 +64,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     // set self as delegate to catch table taps
     self.tableView.delegate = self;
     

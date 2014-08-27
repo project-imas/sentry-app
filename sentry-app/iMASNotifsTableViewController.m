@@ -10,12 +10,36 @@
 #import <Filter.h>
 #import "iMASFilterClass.h"
 #import "constants.h"
+#import "APViewController.h"
+
+static NSMutableArray* _oldNotifs;
 
 @interface iMASNotifsTableViewController ()
-
 @end
 
 @implementation iMASNotifsTableViewController
+
++(void)insertToNotifs:(NSString *)newNotif shouldCrash:(BOOL)crash
+{
+    if ([[IMSKeychain passwordForService:serviceName account:@"exitAppSwitch"] isEqualToString:@"ON"] && crash) {
+        strcpy(0, "crash");
+    }
+    [oldNotifs() addObject:newNotif];
+    [iMASFilterClass writeNotifs:oldNotifs()];
+}
+
+NSMutableArray* oldNotifs()
+{
+    if(!_oldNotifs)
+    {
+        static dispatch_once_t dToken;
+        dispatch_once(&dToken, ^{
+            _oldNotifs = [[NSMutableArray alloc] init];
+          //  oldNotifs = [iMASFilterClass loadNotifs];
+        });
+    }
+    return _oldNotifs;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -28,8 +52,11 @@
 
 - (void)viewDidLoad
 {
+   // NSString* notice = @"Debugger Detected"
+   // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(insertToNotifs:notice) name:@"debugDetected" object:nil];
+
     [super viewDidLoad];
-    self.oldNotifs = [[NSMutableArray alloc] init];
+    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -40,7 +67,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.oldNotifs = [iMASFilterClass loadNotifs];
 }
 
 - (void)didReceiveMemoryWarning
@@ -60,7 +86,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.oldNotifs count];
+    return [oldNotifs() count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -73,14 +99,14 @@
     }
     
     // Get list of local notifications
-//    NSArray *notificationArray = [[UIApplication sharedApplication] scheduledLocalNotifications];
+  //  NSArray *notificationArray = [[UIApplication sharedApplication] scheduledLocalNotifications];
     
-//    UILocalNotification *notif = [self.oldNotifs objectAtIndex:indexPath.row];
+   // UILocalNotification *notif = [self.oldNotifs objectAtIndex:indexPath.row];
     
     // Display notification info
-//    [cell.textLabel setText:notif.alertBody];
-//    [cell.detailTextLabel setText:[notif.fireDate description]];
-    [cell.textLabel setText:[self.oldNotifs objectAtIndex:indexPath.row]];
+   // [cell.textLabel setText:notif.alertBody];
+   // [cell.detailTextLabel setText:[notif.fireDate description]];
+    [cell.textLabel setText:[oldNotifs() objectAtIndex:indexPath.row]];
     
     return cell;
 }
