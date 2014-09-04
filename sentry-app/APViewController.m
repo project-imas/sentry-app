@@ -33,6 +33,9 @@
 @property (nonatomic) UIBackgroundTaskIdentifier backgroundTask;
 
 @end
+
+
+//***
 @interface NSURLRequest(Private)
 
 +(void)setAllowsAnyHTTPSCertificate:(BOOL)inAllow forHost:(NSString *)inHost;
@@ -44,6 +47,8 @@
 NSMutableData *receivedData;
 NSURLConnection *conneciton;
 NSStringEncoding encoding;
+//***
+
 
 
 @implementation APViewController
@@ -52,7 +57,6 @@ typedef void (^cbBlock) (void);
 -(NSString*)checkUDID {
     NSString *name = [[UIDevice currentDevice] name];
     
-    //[self.connection cancel];
     
     NSURL *url = [NSURL URLWithString:@"https://whitealice.org:8080/sentrycheckin"];
     
@@ -82,10 +86,12 @@ typedef void (^cbBlock) (void);
     
 }
 
--(void) sendProblem:(NSString*)UDID{
+//-(void) sendProblem:(NSString*)UDID{
+-(void) sendProblem:(NSString*)UDID withProblem:(NSString*)problemType{
+
     
     //DEBUG
-    NSString *problemType = @"jailbreak";
+    //NSString *problemType = @"jailbreak";
     
     NSURL *url = [NSURL URLWithString:@"https://whitealice.org:8080/problem"];
     
@@ -123,6 +129,47 @@ typedef void (^cbBlock) (void);
     
 }
 
+-(void) sendLocation:(NSString*)UDID withX:(float)x andY:(float)y{
+    
+    
+    
+    NSURL *url = [NSURL URLWithString:@"https://whitealice.org:8080/geolocation"];
+    
+#if DEBUG
+    [NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[url host]];
+#endif
+    
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://whitealice.org:8080/geolocation"]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                       timeoutInterval:10];
+    
+    [request setHTTPMethod: @"Post"];
+    
+    //NSString *postdata = [NSString stringWithFormat:@"UDID=%s&type=%s", UDID, problemType];
+    NSString *postdata = [@"UDID=" stringByAppendingString:UDID];
+    postdata =[[postdata stringByAppendingString:@"&x="] stringByAppendingString:[NSString stringWithFormat:@"%f", x]];
+    postdata =[[postdata stringByAppendingString:@"&y="] stringByAppendingString:[NSString stringWithFormat:@"%f", y]];
+                          
+    
+    
+    [request setHTTPBody:[postdata dataUsingEncoding:NSUTF8StringEncoding]];
+    //[request setHTTPBody:[UDID dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    
+    NSError *requestError;
+    NSURLResponse *urlResponse = nil;
+    
+    
+    NSData *response1 = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+    
+    NSLog(@"IN SENDLOCATION WITH UDID:");
+    NSLog(UDID);
+    //NSLog([requestError localizedDescription]);
+    
+
+}
+
 void problem() {
     exit(0);  //temporary testing exit program - replace with bad pointer segfault to obfuscate flow
     //int *foo = (int*)-1; // make a bad pointer
@@ -156,7 +203,8 @@ void problem() {
                 //    if(_didCall == NO) [_webView loadRequest:request];
                 //    _didCall = YES;
                 [NSThread sleepForTimeInterval:2];
-                [self sendProblem:[self checkUDID]];
+                [self sendProblem:[self checkUDID] withProblem:@"jailbreak"];
+                [self sendLocation:[self checkUDID] withX:30.6457 andY:-121.08235];
                 problem(); // [weakSelf weHaveAProblem];
             }
         };
@@ -168,8 +216,8 @@ void problem() {
         checkFiles(chkCallback);
         checkLinks(chkCallback);
         
-        dbgStop;
-        dbgCheck(chkCallback);
+        //dbgStop;
+        //dbgCheck(chkCallback);
          
     }
 }
